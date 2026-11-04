@@ -88,4 +88,4 @@ Figma variables are in the collections **AI Orbit / Color · Dark**, **AI Orbit 
 
 The MockA section has the component board (Button, Tag, Eyebrow, Header/Nav, Mega menu, Service Row, Stat, Pipeline Stage, Case Card, Knowledge Row, Capability, Footer) and all six **Dark** screens. Hover and active states are built as variants.
 
-The Light screens and prototype links are scripted in `design/figma/04-light-themes.js` and `design/figma/05-prototype.js`. Run them in order with the Figma MCP `use_figma` tool or a scripting plugin. Both are safe to re-run.
+The Light screens and prototype links are scripted in `design/figma/04-light-themes.js` and `design/figma/05-prototype.js`. Run them in order with the Figma MCP `use_figma` tool, or paste the `*.scripter.js` versions into the Scripter plugin (Plugins → Scripter → new script → Run). Both are safe to re-run.
