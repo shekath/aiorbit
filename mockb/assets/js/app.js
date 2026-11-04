@@ -21,10 +21,10 @@
   window.ORBIT_I = I;
 
   const SVC = [
-    ["enterprise-agents", "Enterprise Agent Solutions", "Production-ready agents that reason, not just automate.", "svc-agents"],
-    ["ai-first-engineering", "AI-First Software Engineering", "Specialist agents embedded across your SDLC.", "svc-engineering"],
-    ["ai-governance", "AI Governance", "Guardrails, quality, ethics and audit readiness.", "svc-governance"],
-    ["ai-advisory", "AI Advisory", "Strategy, readiness and use-case prioritisation.", "svc-advisory"],
+    ["enterprise-agents", "Enterprise Agent Solutions", "Production-ready agents that reason, not just automate.", "photos/svc-agents-team"],
+    ["ai-first-engineering", "AI-First Software Engineering", "Specialist agents embedded across your SDLC.", "photos/svc-engineering-dev"],
+    ["ai-governance", "AI Governance", "Guardrails, quality, ethics and audit readiness.", "photos/svc-governance-secure"],
+    ["ai-advisory", "AI Advisory", "Strategy, readiness and use-case prioritisation.", "photos/svc-advisory-workshop"],
   ];
   const logo = `<a class="logo" href="${root}index.html" aria-label="AI Orbit by Evoke — home">
       <svg viewBox="0 0 34 34" fill="none" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="34" y2="34"><stop stop-color="#6F1AB6"/><stop offset="1" stop-color="#FF0032"/></linearGradient></defs>
