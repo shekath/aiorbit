@@ -80,7 +80,7 @@ Figma variables are in the collections **AI Orbit / Color · Dark**, **AI Orbit 
 ## Content notes
 
 - Home, Agentic SDLC and case-study copy comes from the "Main" design in Figma.
-- The live evokestechnologies.com page couldn't be reached from the build environment.
+- The live evoketechnologies.com page couldn't be reached from the build environment.
 - Capability lists and meta values on the **Agents, Governance and Advisory** pages are draft copy written from the one-line service descriptions. Please validate them with the content team before launch.
 - Partner names are typeset as text wordmarks. Swap in the official SVG logos according to each partner's brand guidelines.
 
