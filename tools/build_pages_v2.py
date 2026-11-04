@@ -139,7 +139,7 @@ def service(s, prev, nxt):
     <div class="container">
       <div class="head"><div><p class="label">Client story</p><h2 id="story-title" class="h2">Insights behind the success.</h2></div></div>
       <a class="case rv" href="../case-studies/lift-truck-self-service.html" style="grid-template-columns:1.1fr 1fr;grid-template-rows:none">
-        <div class="img" style="aspect-ratio:auto;min-height:360px"><img src="../assets/img/case-production.webp" alt="" width="1600" height="1100" loading="lazy" /><span class="tag">Manufacturing · Global</span></div>
+        <div class="img" style="aspect-ratio:auto;min-height:360px"><img src="../assets/img/photos/case-lift-truck.webp" alt="Operator driving an orange forklift loaded with timber at a warehouse door" width="1600" height="1000" loading="lazy" /><span class="tag">Manufacturing · Global</span></div>
         <div class="body" style="padding:48px;align-content:center"><h3 class="h3" style="font-size:clamp(1.5rem,2.2vw,2rem)">Lift-truck manufacturer turns 453,958 support tickets into self-service answers.</h3>
           <p class="muted">A grounded AI assistant answers dealer questions in 30–60 seconds, with a source reference on every answer.</p>
           <div class="kpi"><b>30–60s</b><span>to a cited answer</span></div>
