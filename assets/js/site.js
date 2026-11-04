@@ -103,6 +103,7 @@
     const open = header.classList.toggle("menu-open");
     menuBtn.setAttribute("aria-expanded", open);
   });
+  header.querySelectorAll(".nav-links a").forEach((a) => a.addEventListener("click", () => { header.classList.remove("menu-open"); menuBtn.setAttribute("aria-expanded", false); }));
   const svcBtn = header.querySelector(".has-menu > button");
   svcBtn.addEventListener("click", () => {
     const li = svcBtn.parentElement; const open = li.classList.toggle("open");

@@ -153,7 +153,7 @@ export function mountOrbit(canvas, opts = {}) {
     camera.aspect = w / h; camera.updateProjectionMatrix();
     const wide = w > 900;
     if (variant === "hero") system.position.set(wide ? 3.6 : 0, wide ? 0.6 : 1.4, 0);
-    else system.position.set(wide ? 5.2 : 1, wide ? 0.4 : 2.4, -2);
+    else system.position.set(wide ? 5.2 : 2.4, wide ? 0.4 : 4.2, -2);
     system.scale.setScalar(wide ? 1 : 0.7);
   }
   layout();
