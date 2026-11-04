@@ -1,0 +1,74 @@
+/* ==========================================================================
+   AI Orbit — design version switcher (shared by Version 1 and Version 2)
+   Adds a "Version" dropdown at the right edge of the header. Switching keeps
+   the visitor on the equivalent page (same path, same #section).
+   Version 1 lives at the site root, Version 2 under /mockb/.
+   Include AFTER the version's own header script.
+   ========================================================================== */
+(() => {
+  const script = document.currentScript;
+  const siteRoot = new URL("../../", script.src);              // …/aiorbit/
+  const here = new URL(location.href);
+  let rel = decodeURIComponent(here.pathname).slice(decodeURIComponent(siteRoot.pathname).length) || "index.html";
+  if (rel.endsWith("/")) rel += "index.html";
+  const isV2 = rel.startsWith("mockb/");
+  const base = isV2 ? rel.slice("mockb/".length) : rel;
+  const hash = here.hash;
+  const href = (v) => new URL((v === 2 ? "mockb/" : "") + base, siteRoot).href + hash;
+
+  const VERSIONS = [
+    { v: 1, name: "Version 1", desc: "Orbit Mono — editorial, minimal, Geist" },
+    { v: 2, name: "Version 2", desc: "Orbital Horizon — bold, Evoke colours, Manrope" },
+  ];
+  const cur = isV2 ? 2 : 1;
+
+  const css = document.createElement("style");
+  css.textContent = `
+  .vsw{position:relative;flex:none}
+  .vsw>button{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px 0 14px;border-radius:999px;border:1px solid var(--line-strong,rgba(127,127,127,.35));background:var(--surface,transparent);color:var(--fg,inherit);font:600 14px/1 inherit;font-family:inherit;white-space:nowrap;cursor:pointer;transition:border-color .2s}
+  .vsw>button:hover,.vsw.open>button{border-color:var(--fg,currentColor)}
+  .vsw>button .dot{width:8px;height:8px;border-radius:50%;background:${isV2 ? "#FF0032" : "var(--accent,#7b93ff)"}}
+  .vsw>button svg{transition:transform .25s}
+  .vsw.open>button svg{transform:rotate(180deg)}
+  .vsw ul{position:absolute;right:0;top:calc(100% + 10px);z-index:120;min-width:300px;margin:0;padding:8px;list-style:none;border-radius:16px;background:var(--surface,#fff);border:1px solid var(--line,rgba(127,127,127,.2));box-shadow:0 24px 60px -24px rgba(0,0,0,.55);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .16s,transform .3s cubic-bezier(.2,.8,.2,1),visibility 0s linear .3s}
+  .vsw.open ul{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+  .vsw a{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;padding:12px;border-radius:12px;color:var(--fg,inherit);text-decoration:none}
+  .vsw a:hover,.vsw a:focus-visible{background:var(--surface-2,rgba(127,127,127,.12))}
+  .vsw a b{display:block;font-weight:700;font-size:15px}
+  .vsw a span{display:block;font-size:14px;line-height:1.4;color:var(--fg-muted,#777);margin-top:2px}
+  .vsw a i{width:18px;height:18px;margin-top:2px;border-radius:50%;border:2px solid var(--line-strong,#999);display:grid;place-items:center}
+  .vsw a[aria-current="true"] i{border-color:${isV2 ? "#FF3355" : "var(--accent,#7b93ff)"}}
+  .vsw a[aria-current="true"] i::after{content:"";width:8px;height:8px;border-radius:50%;background:${isV2 ? "#FF3355" : "var(--accent,#7b93ff)"}}
+  .vsw .short{display:none}
+  @media (max-width:560px){.vsw>button .lbl{display:none}.vsw .short{display:inline}.vsw>button{padding:0 10px}.vsw ul{min-width:260px}}`;
+  document.head.append(css);
+
+  const wrap = document.createElement("div");
+  wrap.className = "vsw";
+  wrap.innerHTML = `<button type="button" aria-haspopup="true" aria-expanded="false" aria-controls="vsw-list" aria-label="Design version: Version ${cur}. Switch version">
+      <span class="dot" aria-hidden="true"></span><span class="lbl">Version ${cur}</span><span aria-hidden="true" class="short">V${cur}</span>
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    <ul id="vsw-list" role="menu" aria-label="Design versions">
+      ${VERSIONS.map((x) => `<li role="none"><a role="menuitem" href="${href(x.v)}" ${x.v === cur ? 'aria-current="true"' : ""}><i aria-hidden="true"></i><div><b>${x.name}${x.v === cur ? " · current" : ""}</b><span>${x.desc}</span></div></a></li>`).join("")}
+    </ul>`;
+
+  // Right edge of the header: V1 → .nav-actions, V2 → .tools
+  const slot = document.querySelector(".nav-actions, .hdr .tools");
+  if (!slot) return;
+  slot.append(wrap);
+
+  const btn = wrap.querySelector("button"), items = [...wrap.querySelectorAll("a")];
+  const setOpen = (o, focusFirst) => { wrap.classList.toggle("open", o); btn.setAttribute("aria-expanded", o); if (o && focusFirst) (items.find((a) => a.getAttribute("aria-current")) || items[0]).focus(); };
+  btn.addEventListener("click", (e) => { e.stopPropagation(); setOpen(!wrap.classList.contains("open"), e.detail === 0); });
+  btn.addEventListener("keydown", (e) => { if (e.key === "ArrowDown") { e.preventDefault(); setOpen(true, true); } });
+  wrap.addEventListener("keydown", (e) => {
+    const i = items.indexOf(document.activeElement);
+    if (e.key === "Escape") { setOpen(false); btn.focus(); }
+    if (i > -1 && (e.key === "ArrowDown" || e.key === "ArrowUp")) { e.preventDefault(); items[(i + (e.key === "ArrowDown" ? 1 : -1) + items.length) % items.length].focus(); }
+  });
+  document.addEventListener("click", (e) => { if (!wrap.contains(e.target)) setOpen(false); });
+  // Carry the theme choice across versions
+  items.forEach((a) => a.addEventListener("click", () => {
+    try { const t = document.documentElement.dataset.theme; localStorage.setItem("orbit-theme", t); localStorage.setItem("orbitb-theme", t); } catch {}
+  }));
+})();

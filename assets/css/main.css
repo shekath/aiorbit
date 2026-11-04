@@ -489,3 +489,5 @@ p { margin: 0; }
   .site-header.menu-open .nav-links a, .site-header.menu-open .nav-links > li > button { height: 48px; font-size: 16px; color: var(--fg); }
   .nav-pill { display: none; }
 }
+.brand { white-space: nowrap; }
+@media (max-width: 560px) { .brand small { display: none; } .nav-actions { gap: 8px; } }

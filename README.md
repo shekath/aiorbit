@@ -84,6 +84,34 @@ Figma variables are in the collections **AI Orbit / Color · Dark**, **AI Orbit 
 - Capability lists and meta values on the **Agents, Governance and Advisory** pages are draft copy written from the one-line service descriptions. Please validate them with the content team before launch.
 - Partner names are typeset as text wordmarks. Swap in the official SVG logos according to each partner's brand guidelines.
 
+## Version 2 — "Orbital Horizon" (`mockb/`)
+
+A second design direction, kept alongside Version 1. Version 1 is not modified. A **Version** dropdown at the right edge of every page header switches between the two designs and keeps the visitor on the same page and section (`assets/js/version-switch.js`).
+
+- **Look:** bold, confident and futuristic, with generous white space. A three.js planet horizon rises behind the hero, and inclined orbits carry satellites with light trails. Moving the pointer sends a signal ripple across the planet and parallax-tilts the camera.
+- **Brand colours:** Primary `#3D1766`, Secondary `#6F1AB6`, Accent `#FF0032`. Pure red is used for graphics and large display type only. Red buttons use `#D1002A` (white label 5.6:1) and red text uses `#FF3355` (dark theme) or `#D1002A` (light theme).
+- **Type:** Manrope (display) and Inter (text), both Google Fonts. Body text is 18px, and the smallest text anywhere is 14px. These sizes suit both personas (ages 25–30 and 50–55).
+- **Imagery:** the abstract HD artwork in `mockb/assets/img/` is rendered from original shaders in the brand palette, with no stock or AI-generated images. To regenerate it:
+  ```bash
+  node tools/art/render_art.js && python3 tools/art/to_webp.py
+  ```
+- **Pages:** home, four service pages and the case study. The service pages and case study are generated from the same content as Version 1 with `python3 tools/build_pages_v2.py`.
+- **Micro-interactions:**
+  - headline words rise in with a blur
+  - counting metrics, and progress dials that fill as they scroll into view
+  - an orbit pipeline that auto-advances, or acts as keyboard-accessible tabs when you take control
+  - an orbit-trace arrow on card hover, plus image zoom and parallax
+  - a case-study carousel with previous/next buttons
+  - a theme switch whose knob slides between moon and sun
+  - a header that hides on scroll down and returns on scroll up
+- **Accessibility:**
+  - axe-core WCAG 2.1 AA audit: 0 violations on home, service and case-study pages in both themes
+  - visible focus rings and 44px+ touch targets
+  - a skip link and ARIA tabs and menus
+  - live-region form errors
+  - `prefers-reduced-motion` support
+  - no sideways scrolling from 320px to 1440px
+
 ## Figma file status
 
 The MockA section has the component board (Button, Tag, Eyebrow, Header/Nav, Mega menu, Service Row, Stat, Pipeline Stage, Case Card, Knowledge Row, Capability, Footer) and all six **Dark** screens. Hover and active states are built as variants.

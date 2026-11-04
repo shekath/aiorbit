@@ -1,0 +1,89 @@
+/* ==========================================================================
+   AI Orbit · MockB — design tokens
+   Brand: Primary #3D1766 · Secondary #6F1AB6 · Accent #FF0032
+   Every text pair below is ≥ 4.5:1 (WCAG AA). Pure #FF0032 is used for
+   graphics and large display type only; red text/buttons use --accent-text.
+   ========================================================================== */
+:root {
+  --brand-primary: #3D1766;
+  --brand-secondary: #6F1AB6;
+  --brand-accent: #FF0032;
+}
+
+:root,
+:root[data-theme="dark"] {
+  --bg: #0D0716;
+  --bg-2: #130A20;
+  --surface: #1A0F2B;
+  --surface-2: #221538;
+  --line: rgba(246, 243, 251, 0.10);
+  --line-strong: rgba(246, 243, 251, 0.20);
+
+  --fg: #F6F3FB;          /* 18.1:1 on --bg */
+  --fg-muted: #BDB3CE;    /*  9.9:1 */
+  --fg-subtle: #9488A8;   /*  6.0:1 */
+
+  --violet: #B98CFF;      /* violet as text on dark, 7.8:1 */
+  --accent-text: #FF3355; /* red as text on dark, 5.5:1 */
+  --btn-bg: #D1002A;      /* white label 5.6:1 */
+  --btn-bg-hover: #FF0032;
+  --btn-2-bg: var(--brand-secondary);
+
+  --glow: rgba(111, 26, 182, 0.45);
+  --ring: #B98CFF;
+  --shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.9);
+  --hero-sky-a: #0D0716;
+  --hero-sky-b: #1B0B30;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #FBFAFD;
+  --bg-2: #F3EFF9;
+  --surface: #FFFFFF;
+  --surface-2: #F6F2FC;
+  --line: rgba(20, 10, 34, 0.10);
+  --line-strong: rgba(20, 10, 34, 0.20);
+
+  --fg: #140A22;          /* 18.4:1 on --bg */
+  --fg-muted: #4A4058;    /*  9.3:1 */
+  --fg-subtle: #6B6178;   /*  5.6:1 */
+
+  --violet: #6F1AB6;      /*  8.1:1 */
+  --accent-text: #D1002A; /*  5.4:1 */
+  --btn-bg: #D1002A;
+  --btn-bg-hover: #B00023;
+  --btn-2-bg: var(--brand-primary);
+
+  --glow: rgba(111, 26, 182, 0.18);
+  --ring: #6F1AB6;
+  --shadow: 0 30px 70px -40px rgba(61, 23, 102, 0.45);
+  --hero-sky-a: #F7F3FC;
+  --hero-sky-b: #E9DDF8;
+  color-scheme: light;
+}
+
+:root {
+  --font-display: "Manrope", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --fs-display: clamp(2.75rem, 6.4vw, 5.75rem);  /* 92 @1440 */
+  --fs-h1: clamp(2.5rem, 4.6vw, 4.25rem);        /* 68 */
+  --fs-h2: clamp(2rem, 3.4vw, 3.25rem);          /* 52 */
+  --fs-h3: clamp(1.375rem, 1.8vw, 1.75rem);      /* 28 */
+  --fs-lead: clamp(1.125rem, 1.4vw, 1.3125rem);  /* 21 */
+  --fs-body: 1.125rem;                           /* 18 */
+  --fs-small: 1rem;                              /* 16 */
+  --fs-label: 0.875rem;                          /* 14 — smallest text on the site */
+
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 136px;
+
+  --r-sm: 10px; --r: 16px; --r-lg: 28px; --r-pill: 999px;
+  --container: 1280px;
+  --gutter: clamp(20px, 5vw, 80px);
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-orbit: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 180ms; --t: 360ms; --t-slow: 800ms;
+}
