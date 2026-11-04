@@ -1,0 +1,82 @@
+/* ==========================================================================
+   AI Orbit · Version 3 "Neural Aurora" — design tokens
+   Palette reference: colejames.io (ink #100F15, surface #1B1924, text #F6F6F9,
+   lavender #B2AFCA / #9F9BBA, rule #3C3953, electric blue #4D65FF) extended with
+   an AI aurora: violet → electric blue → cyan.
+   Every text pair is ≥ 4.5:1 (WCAG AA); see README.
+   ========================================================================== */
+:root,
+:root[data-theme="dark"] {
+  --bg: #0B0A10;
+  --bg-2: #100F15;
+  --surface: #15131D;
+  --surface-2: #1B1924;
+  --line: rgba(178, 175, 202, 0.12);
+  --line-2: rgba(178, 175, 202, 0.24);
+
+  --fg: #F6F6F9;
+  --fg-muted: #B2AFCA;
+  --fg-subtle: #8E8AA8;
+
+  --violet: #9B7BFF;
+  --blue: #6C82FF;
+  --cyan: #3FDCF2;
+  --accent-text: #8EA0FF;
+  --grad: linear-gradient(100deg, #A485FF 0%, #6C82FF 48%, #3FDCF2 100%);
+  --grad-soft: linear-gradient(135deg, rgba(124, 92, 255, .35), rgba(77, 101, 255, .25) 50%, rgba(34, 211, 238, .25));
+
+  --btn-bg: #F6F6F9;
+  --btn-fg: #100F15;
+  --glass: rgba(21, 19, 29, 0.62);
+  --shadow: 0 40px 120px -60px rgba(0, 0, 0, 0.9);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #F6F6F9;
+  --bg-2: #EEEDF4;
+  --surface: #FFFFFF;
+  --surface-2: #F1F0F7;
+  --line: rgba(16, 15, 21, 0.09);
+  --line-2: rgba(16, 15, 21, 0.18);
+
+  --fg: #100F15;
+  --fg-muted: #4A4762;
+  --fg-subtle: #646080;
+
+  --violet: #6A3DF0;
+  --blue: #3D4FE6;
+  --cyan: #0A7F9E;
+  --accent-text: #3D4FE6;
+  --grad: linear-gradient(100deg, #6A3DF0 0%, #3D4FE6 50%, #0A7F9E 100%);
+  --grad-soft: linear-gradient(135deg, rgba(106, 61, 240, .16), rgba(61, 79, 230, .12) 50%, rgba(10, 127, 158, .12));
+
+  --btn-bg: #100F15;
+  --btn-fg: #F6F6F9;
+  --glass: rgba(255, 255, 255, 0.72);
+  --shadow: 0 40px 100px -60px rgba(40, 30, 90, 0.35);
+  color-scheme: light;
+}
+
+:root {
+  --font-display: "Sora", "DM Sans", system-ui, sans-serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --fs-hero: clamp(3rem, 8.2vw, 7.5rem);      /* 120 @1440 */
+  --fs-h1: clamp(2.5rem, 5.2vw, 4.75rem);     /* 76 */
+  --fs-h2: clamp(2rem, 3.8vw, 3.5rem);        /* 56 */
+  --fs-h3: clamp(1.375rem, 1.9vw, 1.75rem);   /* 28 */
+  --fs-lead: clamp(1.125rem, 1.4vw, 1.3125rem);
+  --fs-body: 1.0625rem;                       /* 17 */
+  --fs-small: 0.9375rem;                      /* 15 */
+  --fs-mono: 0.8125rem;                       /* 13 */
+
+  --r-sm: 10px; --r: 18px; --r-lg: 28px; --r-pill: 999px;
+  --container: 1280px;
+  --gutter: clamp(20px, 5vw, 72px);
+
+  --ease: cubic-bezier(0.625, 0.05, 0, 1);    /* matches the reference's button easing */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 200ms; --t: 450ms; --t-slow: 900ms;
+}

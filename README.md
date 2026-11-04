@@ -113,6 +113,63 @@ A second design direction, kept alongside Version 1. Version 1 is not modified. 
   - `prefers-reduced-motion` support
   - no sideways scrolling from 320px to 1440px
 
+## Version 3 — "Neural Aurora" (`v3/`)
+
+The third design direction. It is selectable from the **Version** dropdown at the right edge of every header; Versions 1 and 2 are unchanged.
+
+**Content**
+- All copy comes from the live page at https://www.evoketechnologies.com/ai-orbit/:
+  - hero, services with their taglines ("Build What Thinks", "Move Fast. Sleep Well" and so on)
+  - 4 case studies
+  - 6 industries
+  - 8 knowledge-hub items
+  - offices and contact details
+- Case-study cards link to the corresponding pages on evoketechnologies.com.
+
+**Design reference**
+- Colour, gradient and interaction patterns follow https://www.colejames.io/:
+  - ink `#100F15`, surfaces `#1B1924`, text `#F6F6F9`, lavender body copy `#B2AFCA`, electric blue `#4D65FF`
+  - violet → blue → cyan aurora glows
+  - a pixel-dot matrix
+  - light-weight display type and mono labels
+  - Lenis smooth scrolling, scroll-scrubbed word reveals, character-roll buttons, and cards that dim their siblings on hover
+- These patterns are rebuilt for AI Orbit, not copied.
+
+**Type**
+- Sora 300/400 for display, DM Sans for body text (17px base), JetBrains Mono for labels. All are Google Fonts.
+
+**WebGL (`v3/assets/js/neural-gl.js`, three.js)**
+- An aurora and pixel-dot field that follows the cursor.
+- A neural globe: about 700 neurons and 2,000 synapses carrying travelling signals.
+  - Neurons near the pointer activate.
+  - A click or tap sends a shockwave across the network.
+  - The globe turns toward the pointer.
+- Three inclined agent orbits with light trails.
+- Scroll parallax.
+- An "aurora" mode is reused for the CTA and the sub-page heroes.
+
+**Interactions**
+- A pinned horizontal services track driven by vertical scroll, with a progress bar.
+- A cursor spotlight on card borders.
+- An industries explorer: an accordion with a cross-fading sticky photo.
+- Knowledge-hub filters and "Load more".
+- A live neural-activity readout in the hero.
+- Live local clocks for each office.
+- A gradient footer wordmark that follows the cursor.
+- A floating glass nav that hides on scroll down.
+
+**Pages**
+- Home, four service pages and the lift-truck case study. The sub-pages are generated with `python3 tools/build_pages_v3.py`.
+
+**Accessibility**
+- axe-core WCAG 2.1 AA: 0 violations on the home, service and case-study pages in both themes.
+- No horizontal overflow from 320px to 1440px.
+- `prefers-reduced-motion` disables smooth scrolling, the pinned track, parallax and all WebGL motion.
+
+**Assets**
+- Photos are listed in `v3/assets/img/CREDITS.md`.
+- Lenis 1.1.20 (MIT) is vendored in `assets/vendor/`.
+
 ## Figma file status
 
 The MockA section has the component board (Button, Tag, Eyebrow, Header/Nav, Mega menu, Service Row, Stat, Pipeline Stage, Case Card, Knowledge Row, Capability, Footer) and all six **Dark** screens. Hover and active states are built as variants.

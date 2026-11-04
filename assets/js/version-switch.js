@@ -1,8 +1,8 @@
 /* ==========================================================================
-   AI Orbit — design version switcher (shared by Version 1 and Version 2)
+   AI Orbit — design version switcher (shared by Versions 1, 2 and 3)
    Adds a "Version" dropdown at the right edge of the header. Switching keeps
    the visitor on the equivalent page (same path, same #section).
-   Version 1 lives at the site root, Version 2 under /mockb/.
+   Version 1 lives at the site root, Version 2 under /mockb/, Version 3 under /v3/.
    Include AFTER the version's own header script.
    ========================================================================== */
 (() => {
@@ -11,23 +11,27 @@
   const here = new URL(location.href);
   let rel = decodeURIComponent(here.pathname).slice(decodeURIComponent(siteRoot.pathname).length) || "index.html";
   if (rel.endsWith("/")) rel += "index.html";
-  const isV2 = rel.startsWith("mockb/");
-  const base = isV2 ? rel.slice("mockb/".length) : rel;
+  const PREFIX = { 1: "", 2: "mockb/", 3: "v3/" };
+  const cur = rel.startsWith("v3/") ? 3 : rel.startsWith("mockb/") ? 2 : 1;
+  const isV2 = cur === 2;
+  const base = rel.slice(PREFIX[cur].length);
   const hash = here.hash;
-  const href = (v) => new URL((v === 2 ? "mockb/" : "") + base, siteRoot).href + hash;
+  const href = (v) => new URL(PREFIX[v] + base, siteRoot).href + hash;
+  const DOT = { 1: "var(--accent,#7b93ff)", 2: "#FF0032", 3: "linear-gradient(135deg,#A485FF,#6C82FF,#3FDCF2)" };
+  const RING = { 1: "var(--accent,#7b93ff)", 2: "#FF3355", 3: "#6C82FF" };
 
   const VERSIONS = [
     { v: 1, name: "Version 1", desc: "Orbit Mono — editorial, minimal, Geist" },
     { v: 2, name: "Version 2", desc: "Orbital Horizon — bold, Evoke colours, Manrope" },
+    { v: 3, name: "Version 3", desc: "Neural Aurora — WebGL neural orbit, Sora" },
   ];
-  const cur = isV2 ? 2 : 1;
 
   const css = document.createElement("style");
   css.textContent = `
   .vsw{position:relative;flex:none}
   .vsw>button{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px 0 14px;border-radius:999px;border:1px solid var(--line-strong,rgba(127,127,127,.35));background:var(--surface,transparent);color:var(--fg,inherit);font:600 14px/1 inherit;font-family:inherit;white-space:nowrap;cursor:pointer;transition:border-color .2s}
   .vsw>button:hover,.vsw.open>button{border-color:var(--fg,currentColor)}
-  .vsw>button .dot{width:8px;height:8px;border-radius:50%;background:${isV2 ? "#FF0032" : "var(--accent,#7b93ff)"}}
+  .vsw>button .dot{width:8px;height:8px;border-radius:50%;background:${DOT[cur]}}
   .vsw>button svg{transition:transform .25s}
   .vsw.open>button svg{transform:rotate(180deg)}
   .vsw ul{position:absolute;right:0;top:calc(100% + 10px);z-index:120;min-width:300px;margin:0;padding:8px;list-style:none;border-radius:16px;background:var(--surface,#fff);border:1px solid var(--line,rgba(127,127,127,.2));box-shadow:0 24px 60px -24px rgba(0,0,0,.55);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .16s,transform .3s cubic-bezier(.2,.8,.2,1),visibility 0s linear .3s}
@@ -37,8 +41,8 @@
   .vsw a b{display:block;font-weight:700;font-size:15px}
   .vsw a span{display:block;font-size:14px;line-height:1.4;color:var(--fg-muted,#777);margin-top:2px}
   .vsw a i{width:18px;height:18px;margin-top:2px;border-radius:50%;border:2px solid var(--line-strong,#999);display:grid;place-items:center}
-  .vsw a[aria-current="true"] i{border-color:${isV2 ? "#FF3355" : "var(--accent,#7b93ff)"}}
-  .vsw a[aria-current="true"] i::after{content:"";width:8px;height:8px;border-radius:50%;background:${isV2 ? "#FF3355" : "var(--accent,#7b93ff)"}}
+  .vsw a[aria-current="true"] i{border-color:${RING[cur]}}
+  .vsw a[aria-current="true"] i::after{content:"";width:8px;height:8px;border-radius:50%;background:${RING[cur]}}
   .vsw .short{display:none}
   @media (max-width:560px){.vsw>button .lbl{display:none}.vsw .short{display:inline}.vsw>button{padding:0 10px}.vsw ul{min-width:260px}}`;
   document.head.append(css);
@@ -53,7 +57,7 @@
     </ul>`;
 
   // Right edge of the header: V1 → .nav-actions, V2 → .tools
-  const slot = document.querySelector(".nav-actions, .hdr .tools");
+  const slot = document.querySelector(".nav-actions, .hdr .tools, .v3-actions");
   if (!slot) return;
   slot.append(wrap);
 
@@ -69,6 +73,6 @@
   document.addEventListener("click", (e) => { if (!wrap.contains(e.target)) setOpen(false); });
   // Carry the theme choice across versions
   items.forEach((a) => a.addEventListener("click", () => {
-    try { const t = document.documentElement.dataset.theme; localStorage.setItem("orbit-theme", t); localStorage.setItem("orbitb-theme", t); } catch {}
+    try { const t = document.documentElement.dataset.theme; localStorage.setItem("orbit-theme", t); localStorage.setItem("orbitb-theme", t); localStorage.setItem("orbitc-theme", t); } catch {}
   }));
 })();
