@@ -492,8 +492,12 @@ p { margin: 0; }
 .brand { white-space: nowrap; }
 @media (max-width: 560px) { .brand small { display: none; } .nav-actions { gap: 8px; } }
 
-/* ---------- Partner logo tiles (official logos, original colours) ---------- */
+/* ---------- Partner logo tiles (official logos, original colours) ----------
+   Every tile is the same size; each logo is fitted inside a fixed content box
+   (max 116 × 26px by default) and keeps its aspect ratio. --h lets compact
+   marks (Salesforce, AWS) use a little more height so all read at equal weight. */
 .marquee-track { align-items: center; gap: 20px; }
-.ptile { flex: none; display: grid; place-items: center; height: 60px; padding: 0 26px; border-radius: 12px; background: #fff; border: 1px solid var(--line); transition: transform var(--dur) var(--ease-out), box-shadow var(--dur); }
-.ptile img { height: var(--h, 24px); width: auto; max-width: 160px; }
+.ptile { flex: none; display: grid; place-items: center; width: 168px; height: 64px; padding: 0 20px; border-radius: 12px; background: #fff; border: 1px solid var(--line); transition: transform var(--dur) var(--ease-out), box-shadow var(--dur); }
+.ptile img { display: block; width: auto; height: auto; max-width: 116px; max-height: var(--h, 26px); }
 .ptile:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -18px rgba(0, 0, 0, .45); }
+@media (max-width: 560px) { .ptile { width: 140px; height: 56px; } .ptile img { max-width: 96px; max-height: calc(var(--h, 26px) * .85); } }
