@@ -91,7 +91,7 @@ A second design direction, kept alongside Version 1. Version 1 is not modified. 
 - **Look:** bold, confident and futuristic, with generous white space. A three.js planet horizon rises behind the hero, and inclined orbits carry satellites with light trails. Moving the pointer sends a signal ripple across the planet and parallax-tilts the camera.
 - **Brand colours:** Primary `#3D1766`, Secondary `#6F1AB6`, Accent `#FF0032`. Pure red is used for graphics and large display type only. Red buttons use `#D1002A` (white label 5.6:1) and red text uses `#FF3355` (dark theme) or `#D1002A` (light theme).
 - **Type:** Manrope (display) and Inter (text), both Google Fonts. Body text is 18px, and the smallest text anywhere is 14px. These sizes suit both personas (ages 25–30 and 50–55).
-- **Photography:** the Services, Client stories and Industries cards use real, royalty-free photos from Pexels (Pexels License, free for commercial use), cropped and compressed to WebP in `mockb/assets/img/photos/`. Sources are listed in `CREDITS.md` there.
+- **Photography:** the Services, Client stories, Industries and Knowledge hub cards use real, royalty-free photos from Pexels (Pexels License, free for commercial use), cropped and compressed to WebP in `mockb/assets/img/photos/`. Sources are listed in `CREDITS.md` there.
 - **Imagery:** the remaining abstract HD artwork in `mockb/assets/img/` is rendered from original shaders in the brand palette, with no stock or AI-generated images. To regenerate it:
   ```bash
   node tools/art/render_art.js && python3 tools/art/to_webp.py

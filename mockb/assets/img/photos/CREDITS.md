@@ -16,3 +16,4 @@ The photos were cropped and resized for the AI Orbit Version 2 design.
 | `svc-engineering-dev` | Services: AI-First Software Engineering | https://www.pexels.com/photo/man-working-on-computers-coding-16129724/ (Lisa Fotios) |
 | `svc-governance-secure` | Services: AI Governance | https://www.pexels.com/photo/close-up-of-a-blue-server-rack-in-datacenter-37730211/ |
 | `svc-advisory-workshop` | Services: AI Advisory | https://www.pexels.com/photo/team-brainstorming-session-during-strategy-meeting-39205089/ |
+| `insight-code-review` | Knowledge hub: featured knowledge paper | https://www.pexels.com/photo/back-view-of-a-people-looking-the-monitor-7988759/ |
