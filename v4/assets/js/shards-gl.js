@@ -14,8 +14,9 @@ const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const isLight = () => document.documentElement.dataset.theme === "light";
 
 const SAFE = /* glsl */ `uniform vec4 uSafe[2]; uniform vec2 uRes;
-  float inRect(vec4 r, vec2 uv, vec2 e){ return smoothstep(r.x - e.x, r.x + e.x, uv.x) * (1. - smoothstep(r.z - e.x, r.z + e.x, uv.x)) * smoothstep(r.y - e.y, r.y + e.y, uv.y) * (1. - smoothstep(r.w - e.y, r.w + e.y, uv.y)); }
-  float safeFade(){ vec2 uv = gl_FragCoord.xy / uRes; vec2 e = vec2(40.) / uRes; return 1. - .9 * max(inRect(uSafe[0], uv, e), inRect(uSafe[1], uv, e)); }`;
+  // fully faded across the whole text box; the feather sits outside it
+  float inRect(vec4 r, vec2 uv, vec2 e){ return smoothstep(r.x - 2. * e.x, r.x, uv.x) * (1. - smoothstep(r.z, r.z + 2. * e.x, uv.x)) * smoothstep(r.y - 2. * e.y, r.y, uv.y) * (1. - smoothstep(r.w, r.w + 2. * e.y, uv.y)); }
+  float safeFade(){ vec2 uv = gl_FragCoord.xy / uRes; vec2 e = vec2(56.) / uRes; return 1. - .99 * max(inRect(uSafe[0], uv, e), inRect(uSafe[1], uv, e)); }`;
 
 // iridescent crystal shading: dark glassy body, gradient rim (violet → blue → cyan), sharp spec
 const CRYSTAL_V = /* glsl */ `

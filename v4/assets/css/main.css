@@ -230,6 +230,11 @@
 :root, :root[data-theme="dark"] { --wipe-to: #E9E9EC; } :root[data-theme="light"] { --wipe-to: #0A0A0B; }
 
 /* ---------- fixes ---------- */
+/* hero legibility: brighter body copy on dark, solid chips under small labels */
+:root:not([data-theme="light"]) .h4 .side p { color: #D2D2DA; text-shadow: 0 1px 2px rgba(10,10,11,.9), 0 0 18px rgba(10,10,11,.85); }
+:root[data-theme="light"] .h4 .side p { color: #33333C; }
+.h4 .top .lbl, .h4 .foot .lbl { background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); padding: 6px 10px; border-radius: 8px; color: var(--fg); }
+.h4 .foot .lbl.hold { padding-left: 6px; }
 .h4 .copy h1.mega { font-size: clamp(3rem, 7.4vw, 7.6rem); }
 .h4 .copy { max-width: calc(100% - 2 * var(--gutter) - min(360px, 40vw) - 40px); }
 @media (max-width: 900px) { .h4 .copy { max-width: none; right: var(--gutter); } .h4 .copy h1.mega { font-size: clamp(2.9rem, 13vw, 4.6rem); } }

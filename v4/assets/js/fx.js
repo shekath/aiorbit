@@ -94,7 +94,7 @@
   const words = $(".svc4 .words");
   let letters = [];
   if (words) {
-    $$(".w4", words).forEach((w) => { const t = w.textContent; w.setAttribute("aria-label", t); w.innerHTML = [...t].map((ch) => `<span class="ch" aria-hidden="true">${ch === " " ? "&nbsp;" : ch}</span>`).join(""); });
+    $$(".w4", words).forEach((w) => { const t = w.textContent; w.innerHTML = `<span class="sr-only">${t}</span>` + [...t].map((ch) => `<span class="ch" aria-hidden="true">${ch === " " ? "&nbsp;" : ch}</span>`).join(""); });
     const sizeGrad = () => $$(".w4.grad", words).forEach((w) => { const b = w.getBoundingClientRect(); w.style.setProperty("--ww", b.width + "px"); $$(".ch", w).forEach((c) => c.style.setProperty("--ox", (c.getBoundingClientRect().left - b.left) + "px")); });
     sizeGrad(); addEventListener("resize", sizeGrad); document.fonts?.ready.then(sizeGrad);
     letters = $$(".ch", words).map((el) => ({ el, dx: (Math.random() - .5) * 2, dy: (Math.random() - .5) * 2, r: (Math.random() - .5) * 720, z: Math.random() }));
