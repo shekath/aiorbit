@@ -213,3 +213,10 @@ The Light screens and prototype links are scripted in `design/figma/04-light-the
 - a prototype with section scroll links and a Dark ↔ Light theme toggle.
 
 Colours are bound to the **AI Orbit V4 / Color** collection (Dark and Light modes), and type uses the `V4/*` text styles. The scripts and the re-run steps are in [`design/figma/v4/`](design/figma/v4/README.md).
+
+**Version 5 "Clarity" is also in MockB, to the right of Version 4.** It is a content-first redesign:
+- a compact, structured hero;
+- vector AI elements (agent console, neural lattice, architecture flow) instead of the WebGL shards;
+- auto-layout throughout, so no text clips or overlaps.
+
+It includes Home Dark and Home Light, a service page, Mobile Dark and Mobile Light, and a component board. See [`design/figma/v5/`](design/figma/v5/README.md).
