@@ -133,6 +133,10 @@
   const hudA = document.querySelector("[data-hud-agents]"), hudS = document.querySelector("[data-hud-signals]");
   if (hudA) { let s = 2318; setInterval(() => { s += 37 + Math.floor(Math.random() * 60); hudS.textContent = s.toLocaleString("en-US"); hudA.textContent = String(10 + Math.floor(Math.random() * 3)).padStart(2, "0"); }, calm ? 99999 : 1200); }
 
+  /* ---------- HUD UTC clock ---------- */
+  const utc = document.querySelector("[data-utc]");
+  if (utc) { const tick = () => { utc.textContent = "UTC " + new Date().toISOString().slice(11, 19); }; tick(); setInterval(tick, 1000); }
+
   /* ---------- Industries explorer ---------- */
   const ind = document.querySelector("[data-industries]");
   if (ind) {
