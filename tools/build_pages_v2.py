@@ -41,7 +41,7 @@ def head(title, desc):
 
 
 TAIL = """<script src="../assets/js/app.js"></script>
-<script src="../../assets/js/version-switch.js?v=3"></script>
+<script src="../../assets/js/version-switch.js?v=4"></script>
 </body>
 </html>
 """
