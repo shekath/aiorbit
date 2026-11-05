@@ -5,6 +5,7 @@
   const html = document.documentElement;
   const root = document.body.dataset.root || "";
   const page = document.body.dataset.page || "";
+  const imgRoot = document.body.dataset.imgRoot || root + "assets/img/";
   const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -32,7 +33,7 @@
   nav.innerHTML = `${brand}
     <nav aria-label="Primary"><ul class="links" id="v3-links">
       <li class="dd"><button aria-expanded="false" aria-controls="v3-dd" ${page.startsWith("svc") ? 'aria-current="page"' : ""}>Services <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-        <div class="dd-panel" id="v3-dd">${SVC.map(([s, n, d, img]) => `<a href="${root}services/${s}.html"><img src="${root}assets/img/${img}-900.webp" alt="" width="84" height="60" loading="lazy"><div><b>${n}</b><span>${d}</span></div></a>`).join("")}</div></li>
+        <div class="dd-panel" id="v3-dd">${SVC.map(([s, n, d, img]) => `<a href="${root}services/${s}.html"><img src="${imgRoot}${img}-900.webp" alt="" width="84" height="60" loading="lazy"><div><b>${n}</b><span>${d}</span></div></a>`).join("")}</div></li>
       <li><a href="${root}index.html#cases" ${page === "case" ? 'aria-current="page"' : ""}>Case studies</a></li>
       <li><a href="${root}index.html#industries">Industries</a></li>
       <li><a href="${root}index.html#insights">Insights</a></li>
