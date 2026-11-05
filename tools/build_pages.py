@@ -209,7 +209,7 @@ def page(s, prev, nxt):
   </nav>
 </main>
 <script src="../assets/js/site.js"></script>
-<script src="../assets/js/version-switch.js?v=4"></script>
+<script src="../assets/js/version-switch.js?v=5"></script>
 <script type="module" src="../assets/js/orbit-gl.js"></script>
 </body>
 </html>

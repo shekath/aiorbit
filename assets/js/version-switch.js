@@ -1,8 +1,8 @@
 /* ==========================================================================
-   AI Orbit — design version switcher (shared by Versions 1–4)
+   AI Orbit — design version switcher (shared by Versions 1–5)
    Adds a "Version" dropdown at the right edge of the header. Switching keeps
    the visitor on the equivalent page (same path, same #section).
-   Version 1 lives at the site root, Version 2 under /mockb/, Version 3 under /v3/, Version 4 under /v4/.
+   Version 1 lives at the site root, Version 2 under /mockb/, Version 3 under /v3/, Version 4 under /v4/, Version 5 under /v5/.
    Include AFTER the version's own header script.
    ========================================================================== */
 (() => {
@@ -11,20 +11,21 @@
   const here = new URL(location.href);
   let rel = decodeURIComponent(here.pathname).slice(decodeURIComponent(siteRoot.pathname).length) || "index.html";
   if (rel.endsWith("/")) rel += "index.html";
-  const PREFIX = { 1: "", 2: "mockb/", 3: "v3/", 4: "v4/" };
-  const cur = rel.startsWith("v4/") ? 4 : rel.startsWith("v3/") ? 3 : rel.startsWith("mockb/") ? 2 : 1;
+  const PREFIX = { 1: "", 2: "mockb/", 3: "v3/", 4: "v4/", 5: "v5/" };
+  const cur = rel.startsWith("v5/") ? 5 : rel.startsWith("v4/") ? 4 : rel.startsWith("v3/") ? 3 : rel.startsWith("mockb/") ? 2 : 1;
   const isV2 = cur === 2;
   const base = rel.slice(PREFIX[cur].length);
   const hash = here.hash;
   const href = (v) => new URL(PREFIX[v] + base, siteRoot).href + hash;
-  const DOT = { 1: "var(--accent,#7b93ff)", 2: "#FF0032", 3: "linear-gradient(135deg,#A485FF,#6C82FF,#3FDCF2)", 4: "conic-gradient(#A485FF,#6C82FF,#3FDCF2,#A485FF)" };
-  const RING = { 1: "var(--accent,#7b93ff)", 2: "#FF3355", 3: "#6C82FF", 4: "#6C82FF" };
+  const DOT = { 1: "var(--accent,#7b93ff)", 2: "#FF0032", 3: "linear-gradient(135deg,#A485FF,#6C82FF,#3FDCF2)", 4: "conic-gradient(#A485FF,#6C82FF,#3FDCF2,#A485FF)", 5: "#4FD8E8" };
+  const RING = { 1: "var(--accent,#7b93ff)", 2: "#FF3355", 3: "#6C82FF", 4: "#6C82FF", 5: "var(--accent,#8B97FF)" };
 
   const VERSIONS = [
     { v: 1, name: "Version 1", desc: "Orbit Mono — editorial, minimal, Geist" },
     { v: 2, name: "Version 2", desc: "Orbital Horizon — bold, Evoke colours, Manrope" },
     { v: 3, name: "Version 3", desc: "Neural Aurora — WebGL neural orbit, Sora" },
     { v: 4, name: "Version 4", desc: "Monolith — crystal shards, scroll stories, Sora" },
+    { v: 5, name: "Version 5", desc: "Clarity — content first, AI agent console, Sora" },
   ];
 
   const css = document.createElement("style");
@@ -58,7 +59,7 @@
     </ul>`;
 
   // Right edge of the header: V1 → .nav-actions, V2 → .tools
-  const slot = document.querySelector(".nav-actions, .hdr .tools, .v3-actions");
+  const slot = document.querySelector(".nav-actions, .hdr .tools, .v3-actions, .v5-actions");
   if (!slot) return;
   slot.append(wrap);
 
