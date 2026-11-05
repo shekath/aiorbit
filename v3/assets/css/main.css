@@ -365,3 +365,25 @@ tr:last-child td { border-bottom: 0; }
   .hero .ctas .btn { width: 100%; justify-content: space-between; }
   .cta { border-radius: 24px; padding-inline: 20px; }
 }
+
+/* ---------- Space refinement: legibility + HUD ---------- */
+/* Readability scrim: a feathered pool of background colour behind the hero copy,
+   so stars, nebula and globe lines never sit directly under text. */
+.hero .inner, .p-hero .copy, .cta .in { position: relative; }
+.hero .inner::before, .p-hero .copy::before, .cta .in::before { content: ""; position: absolute; inset: -40px -72px; z-index: -1; pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--bg) 82%, transparent) 0%, color-mix(in srgb, var(--bg) 55%, transparent) 62%, transparent 100%); }
+.cta .in::before { background: radial-gradient(closest-side, color-mix(in srgb, var(--surface) 80%, transparent) 0%, color-mix(in srgb, var(--surface) 45%, transparent) 65%, transparent 100%); }
+:root:not([data-theme="light"]) .hero .lead, :root:not([data-theme="light"]) .p-hero .lead { color: #C9C6DD; text-shadow: 0 1px 2px rgba(7, 6, 11, .9), 0 0 22px rgba(7, 6, 11, .85); }
+:root:not([data-theme="light"]) .hero-title, :root:not([data-theme="light"]) .hud b { text-shadow: 0 2px 24px rgba(7, 6, 11, .6); }
+
+/* HUD frame: precise corner brackets + telemetry */
+.hud-frame { position: absolute; inset: 104px var(--gutter) 92px; z-index: -1; pointer-events: none; }
+.hud-frame i { position: absolute; width: 22px; height: 22px; border: 0 solid var(--line-2); }
+.hud-frame i:nth-child(1) { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.hud-frame i:nth-child(2) { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.hud-frame i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.hud-frame i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+.hud-frame .hf { position: absolute; top: -4px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-muted); font-variant-numeric: tabular-nums; }
+.hud-frame .hf.l { left: 34px; } .hud-frame .hf.r { right: 34px; }
+.hud-frame .hf.r::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); vertical-align: middle; animation: blink 1.6s infinite; }
+@media (max-width: 760px) { .hud-frame { inset: 92px 12px 76px; } .hud-frame .hf { display: none; } .hero .inner::before { inset: -24px -12px; } }
