@@ -205,3 +205,11 @@ Inspired by https://trionn.com/ and re-interpreted for AI Orbit: a monochrome ed
 The MockA section has the component board (Button, Tag, Eyebrow, Header/Nav, Mega menu, Service Row, Stat, Pipeline Stage, Case Card, Knowledge Row, Capability, Footer) and all six **Dark** screens. Hover and active states are built as variants.
 
 The Light screens and prototype links are scripted in `design/figma/04-light-themes.js` and `design/figma/05-prototype.js`. Run them in order with the Figma MCP `use_figma` tool, or paste the `*.scripter.js` versions into the Scripter plugin (Plugins → Scripter → new script → Run). Both are safe to re-run.
+
+**Version 4 "Monolith" is in the MockB section.** It contains:
+- a component board;
+- Home Dark and Home Light at 1440;
+- Mobile Dark and Mobile Light at 390;
+- a prototype with section scroll links and a Dark ↔ Light theme toggle.
+
+Colours are bound to the **AI Orbit V4 / Color** collection (Dark and Light modes), and type uses the `V4/*` text styles. The scripts and the re-run steps are in [`design/figma/v4/`](design/figma/v4/README.md).
