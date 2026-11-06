@@ -78,7 +78,7 @@
 .h4 .top { position: absolute; top: 96px; left: var(--gutter); right: var(--gutter); display: flex; justify-content: space-between; gap: 24px; }
 .h4 .copy { position: absolute; left: var(--gutter); bottom: clamp(88px, 12vh, 140px); max-width: min(1100px, 92vw); }
 .h4 .copy h1 { margin: 0; }
-.h4 .copy h1 .ln { display: block; overflow: hidden; padding-bottom: .04em; }
+.h4 .copy h1 .ln { display: block; overflow: hidden; padding: .2em 0 .26em; margin: -.2em 0 -.26em; }
 .h4 .copy h1 .ln > span { display: inline-block; transform: translateY(105%); transition: transform 1.3s var(--ease); }
 .h4.in .copy h1 .ln > span { transform: none; }
 .h4.in .copy h1 .ln:nth-child(2) > span { transition-delay: .1s; }
