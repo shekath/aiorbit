@@ -92,7 +92,7 @@ def footer(r):
   </div>
 </footer>
 <script src="{r}assets/js/v5.js"></script>
-<script src="{r}../assets/js/version-switch.js?v=5"></script>
+<script src="{r}../assets/js/version-switch.js?v=6"></script>
 </body>
 </html>
 """
@@ -182,44 +182,53 @@ def metric(label, val, g, desc, bars):
 
 
 # ---------------------------------------------------------------- HOME
+# ---- Home page content (shared with Version 6 via tools/build_pages_v6.py) ----
+HOME_TICKS = {"enterprise-agents": ["Custom agents for complex workflows", "Evaluation gates before go-live", "Human-in-the-loop controls"],
+         "ai-first-engineering": ["Agentic SDLC with 150+ skill packs", "Legacy modernization (COBOL, ExtJS)", "Up to 65% delivery time saved"],
+         "ai-governance": ["Guardrails and policy controls", "Model risk and bias testing", "Audit-ready evidence trails"],
+         "ai-advisory": ["AI readiness assessment", "Prioritized use-case roadmap", "Business case and value model"]}
+HOME_LINKS = {"enterprise-agents": "Explore AI Apps", "ai-first-engineering": "Explore SDLC AI", "ai-governance": "Explore AI Governance", "ai-advisory": "Explore AI Advisory"}
+HOME_STEPS = [("search", "Discover", "Readiness, data and risk assessed in two weeks."), ("layers", "Design", "Use cases prioritized and the target architecture agreed."), ("code", "Build", "Agents built with evaluation gates at every step."), ("shield", "Govern", "Guardrails, audit trails and human review in place."), ("rocket", "Scale", "Reusable skill packs roll the win out across teams.")]
+HOME_CASES = [("Pharmaceutical", "Sencha Migration", "AI-orchestrated ExtJS to React modernization for a regulated pharmaceutical enterprise.", "ExtJS → React", "modernized under regulatory controls", "https://www.evoketechnologies.com/insights/case-studies/"),
+         ("Tax technology &amp; compliance", "COBOL Conversion", "Multi-agent modernization that transforms complex COBOL tax engines into validated MSTX with full compliance.", "Minutes", "not months, with zero errors", "https://www.evoketechnologies.com/insights/case-studies/"),
+         ("Manufacturing", "Production Optimization Agent", "An AI assistant that gives plant managers real-time analysis and visual insights on production data for better planning.", "Real-time", "production insight for planners", "https://www.evoketechnologies.com/insights/case-studies/"),
+         ("Manufacturing · Global", "Lift-truck self-service AI", "A grounded assistant turns 453,958 historical support tickets into cited, self-service answers for a global dealer network.", "30–60s", "to a cited answer, down from 1–2 days", "case-studies/lift-truck-self-service.html")]
+HOME_INDS = [("factory", "Manufacturing &amp; Industrial", "From shop floor to boardroom — AI that runs on operational reality.", ["Production optimization", "Predictive maintenance", "Supply-chain risk"]),
+        ("bank", "Financial Services (BFSI)", "Built for audit, scale, and scrutiny.", ["Incident triage", "Tax compliance copilots", "Portfolio risk scoring"]),
+        ("bolt", "Energy (Oil &amp; Gas)", "Decades of unstructured history, turned into operational decisions.", ["Field knowledge assistants", "Demand forecasting", "Storage intelligence"]),
+        ("health", "Healthcare &amp; Life Sciences", "HIPAA-aware AI that earns clinician trust.", ["Clinical knowledge chatbots", "Predictive reliability"]),
+        ("cap", "Higher Education", "A stress-free admissions journey.", ["Document verification", "Admissions intelligence"]),
+        ("mountain", "Mining &amp; Natural Resources", "Modernization without disruption.", ["Spend analytics", "Legacy system assistants"])]
+HOME_INSIGHTS = [("Knowledge paper", "Hyper Programming: A New SDLC Paradigm", "Just-in-time software engineering through agentic AI."),
+       ("Knowledge paper", "Role Convergence in the AI SDLC (ADLC)", "Efficient, governed convergence through a layered skill architecture."),
+       ("Article", "See the System: Why AI Projects Fail When You Map the Symptom Instead of the System", "Why every AI-native build must map the full system before a solution is designed."),
+       ("Article", "Deconstruct: Stage 1 of First Principles Delivery", "How six questions turned a $680,000 routing contract into an $8.3 million finding."),
+       ("Article", "Build: How We Construct AI Systems That Work in Production", "How five principles and two failed build gates cut underwriting time from 4.2 hours to 1.4.")]
+
+
 def home():
     r = ""
     svc_cards = ""
-    extra = {"enterprise-agents": ["Custom agents for complex workflows", "Evaluation gates before go-live", "Human-in-the-loop controls"],
-             "ai-first-engineering": ["Agentic SDLC with 150+ skill packs", "Legacy modernization (COBOL, ExtJS)", "Up to 65% delivery time saved"],
-             "ai-governance": ["Guardrails and policy controls", "Model risk and bias testing", "Audit-ready evidence trails"],
-             "ai-advisory": ["AI readiness assessment", "Prioritized use-case roadmap", "Business case and value model"]}
-    links = {"enterprise-agents": "Explore AI Apps", "ai-first-engineering": "Explore SDLC AI", "ai-governance": "Explore AI Governance", "ai-advisory": "Explore AI Advisory"}
+    extra = HOME_TICKS
+    links = HOME_LINKS
     for s in SERVICES:
         tag, hook, desc, _, _ = LIVE[s["slug"]]
         ticks = "".join(f"<li>{x}</li>" for x in extra[s["slug"]])
         svc_cards += f"""<article class="card svc lift rv"><div class="top"><span class="tile">{ic(SVC_ICON[s['slug']], 24)}</span><span class="label">{s['idx']}</span></div>
           <h3 class="h3">{s['name']}</h3><p class="tagline">{tag} — {hook}</p><p class="body">{desc}</p><ul class="ticks">{ticks}</ul>
           <a class="link push" href="services/{s['slug']}.html">{links[s['slug']]} {A}<span class="sr-only"> — {s['name']}</span></a></article>"""
-    steps = [("search", "Discover", "Readiness, data and risk assessed in two weeks."), ("layers", "Design", "Use cases prioritized and the target architecture agreed."), ("code", "Build", "Agents built with evaluation gates at every step."), ("shield", "Govern", "Guardrails, audit trails and human review in place."), ("rocket", "Scale", "Reusable skill packs roll the win out across teams.")]
+    steps = HOME_STEPS
     pipe = "".join(f'<li class="rv"><div class="idx"><b>{i + 1:02d}</b><i></i></div>{ic(k, 22)}<h3 class="h3">{t}</h3><p class="small">{d}</p></li>' for i, (k, t, d) in enumerate(steps))
-    cases = [("Pharmaceutical", "Sencha Migration", "AI-orchestrated ExtJS to React modernization for a regulated pharmaceutical enterprise.", "ExtJS → React", "modernized under regulatory controls", "https://www.evoketechnologies.com/insights/case-studies/"),
-             ("Tax technology &amp; compliance", "COBOL Conversion", "Multi-agent modernization that transforms complex COBOL tax engines into validated MSTX with full compliance.", "Minutes", "not months, with zero errors", "https://www.evoketechnologies.com/insights/case-studies/"),
-             ("Manufacturing", "Production Optimization Agent", "An AI assistant that gives plant managers real-time analysis and visual insights on production data for better planning.", "Real-time", "production insight for planners", "https://www.evoketechnologies.com/insights/case-studies/"),
-             ("Manufacturing · Global", "Lift-truck self-service AI", "A grounded assistant turns 453,958 historical support tickets into cited, self-service answers for a global dealer network.", "30–60s", "to a cited answer, down from 1–2 days", "case-studies/lift-truck-self-service.html")]
+    cases = HOME_CASES
     case_html = ""
     for ind, t, b, m, ml, u in cases:
         ext = u.startswith("http")
         attrs = ' target="_blank" rel="noopener"' if ext else ""
         sr = '<span class="sr-only"> (opens evoketechnologies.com in a new tab)</span>' if ext else ""
         case_html += f'<a class="card case rv" href="{u}"{attrs}><span class="tag" style="align-self:flex-start">{ind}</span><h3 class="h3">{t}</h3><p class="small">{b}</p><div class="outcome"><b class="grad">{m}</b><span>{ml}</span></div><span class="link push">Read case study {A}{sr}</span></a>'
-    inds = [("factory", "Manufacturing &amp; Industrial", "From shop floor to boardroom — AI that runs on operational reality.", ["Production optimization", "Predictive maintenance", "Supply-chain risk"]),
-            ("bank", "Financial Services (BFSI)", "Built for audit, scale, and scrutiny.", ["Incident triage", "Tax compliance copilots", "Portfolio risk scoring"]),
-            ("bolt", "Energy (Oil &amp; Gas)", "Decades of unstructured history, turned into operational decisions.", ["Field knowledge assistants", "Demand forecasting", "Storage intelligence"]),
-            ("health", "Healthcare &amp; Life Sciences", "HIPAA-aware AI that earns clinician trust.", ["Clinical knowledge chatbots", "Predictive reliability"]),
-            ("cap", "Higher Education", "A stress-free admissions journey.", ["Document verification", "Admissions intelligence"]),
-            ("mountain", "Mining &amp; Natural Resources", "Modernization without disruption.", ["Spend analytics", "Legacy system assistants"])]
+    inds = HOME_INDS
     ind_html = "".join(f'<article class="card ind rv"><span class="tile">{ic(k, 22)}</span><h3 class="h3">{t}</h3><p class="small">{d}</p><div class="pills">' + "".join(f'<span class="pill">{x}</span>' for x in tags) + "</div></article>" for k, t, d, tags in inds)
-    ins = [("Knowledge paper", "Hyper Programming: A New SDLC Paradigm", "Just-in-time software engineering through agentic AI."),
-           ("Knowledge paper", "Role Convergence in the AI SDLC (ADLC)", "Efficient, governed convergence through a layered skill architecture."),
-           ("Article", "See the System: Why AI Projects Fail When You Map the Symptom Instead of the System", "Why every AI-native build must map the full system before a solution is designed."),
-           ("Article", "Deconstruct: Stage 1 of First Principles Delivery", "How six questions turned a $680,000 routing contract into an $8.3 million finding."),
-           ("Article", "Build: How We Construct AI Systems That Work in Production", "How five principles and two failed build gates cut underwriting time from 4.2 hours to 1.4.")]
+    ins = HOME_INSIGHTS
     ins_html = "".join(f'<a href="https://www.evoketechnologies.com/ai-orbit/" target="_blank" rel="noopener"><span class="type">{ic("doc", 18)}<span class="label">{ty}</span></span><div><h3 class="h3">{t}</h3><p class="small">{d}</p></div><span class="label meta">Read</span>{ic("arrow", 20)}<span class="sr-only"> (opens evoketechnologies.com in a new tab)</span></a>' for ty, t, d in ins)
     return head("AI Orbit — Enterprise AI with structure, speed and security | Evoke · V5", "Evoke AI Orbit: build, modernize and govern enterprise AI — custom agents, AI-first engineering, governance and advisory.", r) + f"""<body>
 {header(r, True)}
