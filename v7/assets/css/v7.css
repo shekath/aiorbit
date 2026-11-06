@@ -124,3 +124,9 @@ section:has(> .nn7), div:has(> .nn7) { isolation: isolate; }
 .glow7 { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s; z-index: 0;
   background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--e1) 16%, transparent), transparent 65%); }
 *:hover > .glow7 { opacity: 1; }
+
+/* ---------- Shared chrome recoloured to ember ---------- */
+.wordmark { background: radial-gradient(600px circle at var(--mx, 50%) 30%, #FF5B42, #F46D3A 35%, #EB7F31 60%, rgba(255, 91, 66, .16) 80%); -webkit-background-clip: text; background-clip: text; }
+:root[data-theme="light"] .wordmark { background-image: radial-gradient(600px circle at var(--mx, 50%) 30%, #D9381F, #C9491A 35%, #B85A12 60%, rgba(217, 56, 31, .14) 80%); }
+.preload .count span { background: linear-gradient(100deg, #FF5B42, #EB7F31); -webkit-background-clip: text; background-clip: text; }
+.preload .bar { background: linear-gradient(90deg, #FF5B42, #EB7F31); }
