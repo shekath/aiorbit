@@ -1,0 +1,132 @@
+/* ==========================================================================
+   AI Orbit · Version 7 "Neural Ember"
+   Version 4's monolith layout and motion, with:
+   - a full-width WebGL neural-network hero (violet #A485FF → cyan #3FDCF2),
+     text kept in front on its own layer with a soft veil;
+   - the brand gradient moved to ember #FF5B42 → #EB7F31 (deepened in light
+     mode so gradient text keeps AA contrast);
+   - photos on the service cards and industry rows;
+   - extra micro-interactions (progress bar, arrow swap, pointer spotlight).
+   ========================================================================== */
+@import url("../../../v4/assets/css/main.css");
+
+/* ---------- Ember tokens (dark: exact brand colours; light: deepened for text) ---------- */
+:root, :root[data-theme="dark"], :root[data-theme="light"] .band-inv {
+  --e1: #FF5B42; --e2: #EB7F31;
+  --violet: #FF5B42; --blue: #F46D3A; --cyan: #EB7F31; --accent-text: #FF8A6E;
+  --grad: linear-gradient(100deg, #FF5B42 0%, #EB7F31 100%);
+  --grad-soft: linear-gradient(135deg, rgba(255, 91, 66, .14), rgba(235, 127, 49, .08));
+}
+:root[data-theme="light"], :root[data-theme="dark"] .band-inv, :root:not([data-theme]) .band-inv {
+  --e1: #FF5B42; --e2: #EB7F31;
+  --violet: #D9381F; --blue: #C9491A; --cyan: #B85A12; --accent-text: #C2381F;
+  --grad: linear-gradient(100deg, #D9381F 0%, #B85A12 100%);
+  --grad-soft: linear-gradient(135deg, rgba(217, 56, 31, .10), rgba(184, 90, 18, .06));
+}
+::selection { background: #FF5B42; color: #fff; }
+/* header + footer logo mark (gradient defined inline by the shared V3 chrome) */
+#v3g stop:nth-child(1) { stop-color: #FF5B42; } #v3g stop:nth-child(2) { stop-color: #F46D3A; } #v3g stop:nth-child(3) { stop-color: #EB7F31; }
+
+/* ---------- Neural network host (hero, sub-page heroes, CTA) ---------- */
+.nn7 { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.nn7 canvas { display: block; width: 100% !important; height: 100% !important; }
+section:has(> .nn7), div:has(> .nn7) { isolation: isolate; }
+.p-hero:has(> .nn7), .cta4:has(> .nn7) { touch-action: pan-y; }
+
+/* ---------- Hero ---------- */
+.h7 { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; min-height: clamp(660px, 94svh, 900px); padding-top: 116px; }
+.h7 .veil { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--bg) 84%, transparent) 0%, color-mix(in srgb, var(--bg) 56%, transparent) 36%, transparent 64%),
+              linear-gradient(0deg, color-mix(in srgb, var(--bg) 72%, transparent) 0%, transparent 22%); }
+.h7 .hud { position: absolute; z-index: 1; right: var(--gutter); top: 104px; display: flex; gap: 8px; }
+.h7 .hud span { padding: 6px 10px; border-radius: 8px; background: var(--glass); backdrop-filter: blur(8px); color: var(--fg-muted); }
+.h7 .hud em { font-style: normal; color: var(--fg); font-variant-numeric: tabular-nums; }
+.h7 .stage { position: relative; z-index: 1; flex: 1; display: flex; align-items: center; padding-block: 24px 44px; pointer-events: none; }
+.h7 .stage a, .h7 .stage button { pointer-events: auto; }
+.h7 .copy { position: relative; display: grid; gap: 26px; max-width: 760px; will-change: transform; }
+.h7 .kicker { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.h7 .kicker .tag { display: inline-flex; gap: 8px; align-items: center; padding: 6px 12px 6px 6px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--glass); backdrop-filter: blur(8px);
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); }
+.h7 .kicker .tag b { font-weight: 500; color: #fff; padding: 4px 8px; border-radius: 999px; background: var(--grad); letter-spacing: .1em; }
+.h7 h1 { margin: 0; font-family: var(--font-display); font-weight: 300; font-size: clamp(3rem, 6.4vw, 6.6rem); line-height: 1.04; letter-spacing: -0.045em; text-wrap: balance; }
+.h7 h1 .ln { display: block; }
+.h7 h1 .grad { display: inline-block; padding: 0 .04em .14em 0; margin-bottom: -.14em; }
+.h7 .lead { margin: 0; max-width: 34em; font-size: clamp(16px, 1.25vw, 19px); line-height: 1.6; color: var(--fg-muted); }
+:root:not([data-theme="light"]) .h7 .lead { color: #D2D2DA; }
+.h7 .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.h7 .hint { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; color: var(--fg-muted); }
+.h7 .hint .dot { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line-2); display: grid; place-items: center; }
+.h7 .hint .dot::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--e1); box-shadow: 0 0 12px var(--e1); }
+.h7 .hint .meter { width: 70px; height: 2px; background: var(--line-2); border-radius: 2px; overflow: hidden; }
+.h7 .hint .meter i { display: block; height: 100%; background: var(--grad); transform: scaleX(0); transform-origin: 0 50%; }
+.h7 .strip { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); }
+.h7 .strip a { position: relative; display: grid; gap: 6px; padding: 20px 22px 22px; border-right: 1px solid var(--line); min-width: 0; overflow: hidden; text-decoration: none; }
+.h7 .strip a:last-child { border-right: 0; }
+.h7 .strip a::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--grad); transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease); }
+.h7 .strip a:hover::before, .h7 .strip a:focus-visible::before { transform: scaleX(1); }
+.h7 .strip .t { font-family: var(--font-display); font-size: 17px; line-height: 1.3; letter-spacing: -0.01em; display: flex; justify-content: space-between; gap: 10px; color: var(--fg); }
+.h7 .strip .t span:last-child { color: var(--fg-subtle); transition: transform .45s cubic-bezier(.34,1.56,.64,1), color .3s; }
+.h7 .strip a:hover .t span:last-child { transform: translate(4px, -4px); color: var(--e1); }
+.h7 .strip p { margin: 0; font-size: 14px; color: var(--fg-muted); line-height: 1.5; }
+@media (prefers-reduced-motion: no-preference) {
+  .h7 .copy > * { animation: h7rise 1s var(--ease) both; }
+  .h7 .copy > :nth-child(2) { animation-delay: .08s; } .h7 .copy > :nth-child(3) { animation-delay: .16s; } .h7 .copy > :nth-child(4) { animation-delay: .24s; } .h7 .copy > :nth-child(5) { animation-delay: .32s; }
+  @keyframes h7rise { from { transform: translateY(18px); opacity: .001; } }
+}
+@media (max-width: 900px) {
+  .h7 { min-height: 0; padding-top: 104px; }
+  .h7 .stage { padding-block: 8px 230px; }
+  .h7 .hud { display: none; }
+  .h7 .veil { background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 82%, transparent) 0%, color-mix(in srgb, var(--bg) 64%, transparent) 55%, transparent 78%), linear-gradient(0deg, color-mix(in srgb, var(--bg) 72%, transparent) 0%, transparent 18%); }
+  .h7 .ctas .btn { flex: 1 1 auto; justify-content: space-between; }
+  .h7 .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .h7 .strip a:nth-child(2) { border-right: 0; }
+  .h7 .strip a:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 560px) { .h7 .strip a { padding: 16px 14px 18px; } .h7 .strip p { display: none; } .h7 .kicker .lbl { display: none; } }
+
+/* ---------- Service cards: photo column ---------- */
+.scard.ph7 { grid-template-columns: 112px minmax(0, 1fr); column-gap: 18px; width: min(450px, 42vw); }
+.scard.ph7 > :not(.ph) { grid-column: 2; min-width: 0; }
+.scard.ph7 > .ph { grid-column: 1; grid-row: 1 / span 6; position: relative; border-radius: 12px; overflow: hidden; min-height: 100%; }
+.scard .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease); }
+.scard .ph::after { content: ""; position: absolute; inset: 0; background: var(--grad-soft); mix-blend-mode: multiply; }
+.scard:hover .ph img { transform: scale(1.07); }
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .scard.ph7 { width: auto; grid-template-columns: minmax(0, 1fr); }
+  .scard.ph7 > :not(.ph) { grid-column: 1; }
+  .scard.ph7 > .ph { grid-row: auto; aspect-ratio: 16 / 9; min-height: 0; }
+}
+
+/* ---------- Industries: sector thumbnails ---------- */
+.ind4 li a { grid-template-columns: 70px 120px 1fr 1.1fr 28px; }
+.ind4 li a .th { width: 120px; aspect-ratio: 4 / 3; border-radius: 10px; overflow: hidden; }
+.ind4 li a .th img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); transition: transform .8s var(--ease), filter .4s; }
+.ind4 li a:hover .th img { transform: scale(1.08); filter: none; }
+@media (max-width: 900px) {
+  .ind4 li a { grid-template-columns: 40px minmax(0, 1fr) 24px; row-gap: 12px; }
+  .ind4 li a .n { grid-row: 1; align-self: start; } .ind4 li a > svg { grid-column: 3; grid-row: 1; align-self: start; }
+  .ind4 li a .th, .ind4 li a .t, .ind4 li a .d { grid-column: 2; }
+  .ind4 li a .th { width: 100%; max-width: 260px; aspect-ratio: 16 / 9; }
+}
+
+/* ---------- Micro-interactions ---------- */
+.progress7 { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 300; transform-origin: 0 50%; transform: scaleX(0); background: var(--grad); pointer-events: none; }
+.btn .ic svg { transition: transform .45s var(--ease); }
+@media (prefers-reduced-motion: no-preference) {
+  .btn:hover .ic svg, .btn:focus-visible .ic svg { animation: zip7 .6s var(--ease); }
+  @keyframes zip7 { 0% { transform: none; } 45% { transform: translateX(170%); } 46% { transform: translateX(-170%); } 100% { transform: none; } }
+}
+.btn--ghost { position: relative; overflow: hidden; isolation: isolate; }
+.btn--ghost::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--grad); transform: translateY(101%); transition: transform .55s var(--ease); }
+.btn--ghost:hover, .btn--ghost:focus-visible { color: #fff; border-color: transparent; }
+.btn--ghost:hover::before, .btn--ghost:focus-visible::before { transform: none; }
+.glow7 { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s; z-index: 0;
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--e1) 16%, transparent), transparent 65%); }
+*:hover > .glow7 { opacity: 1; }
+
+/* ---------- Shared chrome recoloured to ember ---------- */
+.wordmark { background: radial-gradient(600px circle at var(--mx, 50%) 30%, #FF5B42, #F46D3A 35%, #EB7F31 60%, rgba(255, 91, 66, .16) 80%); -webkit-background-clip: text; background-clip: text; }
+:root[data-theme="light"] .wordmark { background-image: radial-gradient(600px circle at var(--mx, 50%) 30%, #D9381F, #C9491A 35%, #B85A12 60%, rgba(217, 56, 31, .14) 80%); }
+.preload .count span { background: linear-gradient(100deg, #FF5B42, #EB7F31); -webkit-background-clip: text; background-clip: text; }
+.preload .bar { background: linear-gradient(90deg, #FF5B42, #EB7F31); }

@@ -259,6 +259,34 @@ A standalone design built around a **WebGL neural network** in the hero, with da
 
 **Note:** PP Neue Montreal is a commercial font. License it and self-host it before production.
 
+## Version 7 — "Neural Ember" (`v7/`)
+
+Version 7 is Version 4's monolith layout and motion with a new hero and accents. Pick it from the **Version** dropdown, or open `v7/index.html`.
+
+- **Hero:** a full-width, interactive WebGL neural network (`v7/assets/js/neural7.js`, using the repo's three.js).
+  - About 130 neurons in 8 layers at different depths, in violet `#A485FF` and cyan `#3FDCF2`.
+  - Waves of activity pass layer by layer. Single signals fire along random connections, and occasional cyan pulses travel backwards.
+  - Interaction: neurons near the pointer light up. Hold to charge the network; release to fire a strong forward pass.
+  - The network tilts with the pointer and recedes as you scroll.
+- **Text visibility:** the copy sits on its own layer. The network dims to about 12% brightness behind it, and a soft veil sits between them. Measured contrast against the live animation is at least 5.7:1 in both themes.
+- **Hero layout:** the hero now holds a quick-link strip to the four services instead of empty space.
+- **Sub-pages and CTA:** the service pages, the case study and the CTA band use a calmer version of the same network.
+- **Accents:** the brand gradient is ember `#FF5B42 → #EB7F31`. In light mode it is deepened to `#D9381F → #B85A12` so gradient text keeps AA contrast.
+- **Images:** each service card shows a photo for its service line. Each industry row shows a thumbnail for its sector.
+- **Micro-interactions:** these add to V4's custom cursor, magnetic buttons, letter-roll labels, tilt, peek and velocity marquee.
+  - a scroll progress bar;
+  - the button arrow slides out and back in;
+  - the ghost button fills with the gradient on hover;
+  - a pointer spotlight on cards;
+  - parallax on the hero copy;
+  - a top-border sweep on the service links.
+- **Build:** `python3 tools/build_pages_v7.py` regenerates `v7/` from Version 4. The stylesheet is `v7/assets/css/v7.css`, which imports V4's.
+
+**Checks:**
+- axe: 0 violations in both themes.
+- No horizontal overflow from 320px to 1440px.
+- No clipped text.
+
 ## Figma file status
 
 The MockA section has the component board (Button, Tag, Eyebrow, Header/Nav, Mega menu, Service Row, Stat, Pipeline Stage, Case Card, Knowledge Row, Capability, Footer) and all six **Dark** screens. Hover and active states are built as variants.
@@ -283,3 +311,5 @@ It includes Home Dark and Home Light, a service page, Mobile Dark and Mobile Lig
 **Version 3 "Neural Aurora" is in the MockC section:** Home Dark and Home Light at 1440. It also has the four service pages and the case study, each in Dark and Light. Colours are bound to **AI Orbit V3 / Color**, type uses the `V3 / *` styles, and the WebGL hero and CTA are image renders. See [`design/figma/v3-mockc/`](design/figma/v3-mockc/README.md).
 
 **Version 6 "Signal" is in the MockD section:** Home Dark and Home Light at 1440. It also has the four service pages and the case study, each in Dark and Light. Colours are bound to **AI Orbit V6 / Color**, type uses the `V6 / *` styles, and the partner logos are original-colour vectors. Inter stands in for PP Neue Montreal in Figma. See [`design/figma/v6-mockd/`](design/figma/v6-mockd/README.md).
+
+**Version 7 "Neural Ember" is in the MockE section:** Home Dark and Home Light at 1440. Colours are bound to **AI Orbit V7 / Color**, and the inverted bands are pinned to the opposite mode. See [`design/figma/v7-mocke/`](design/figma/v7-mocke/README.md).

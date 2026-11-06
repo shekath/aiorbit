@@ -1,8 +1,8 @@
 /* ==========================================================================
-   AI Orbit — design version switcher (shared by Versions 1–6)
+   AI Orbit — design version switcher (shared by Versions 1–7)
    Adds a "Version" dropdown at the right edge of the header. Switching keeps
    the visitor on the equivalent page (same path, same #section).
-   Version 1 lives at the site root, Version 2 under /mockb/, Version 3 under /v3/, Version 4 under /v4/, Version 5 under /v5/, Version 6 under /v6/.
+   Version 1 lives at the site root, Version 2 under /mockb/, Version 3 under /v3/, Version 4 under /v4/, Version 5 under /v5/, Version 6 under /v6/, Version 7 under /v7/.
    Include AFTER the version's own header script.
    ========================================================================== */
 (() => {
@@ -11,14 +11,14 @@
   const here = new URL(location.href);
   let rel = decodeURIComponent(here.pathname).slice(decodeURIComponent(siteRoot.pathname).length) || "index.html";
   if (rel.endsWith("/")) rel += "index.html";
-  const PREFIX = { 1: "", 2: "mockb/", 3: "v3/", 4: "v4/", 5: "v5/", 6: "v6/" };
-  const cur = rel.startsWith("v6/") ? 6 : rel.startsWith("v5/") ? 5 : rel.startsWith("v4/") ? 4 : rel.startsWith("v3/") ? 3 : rel.startsWith("mockb/") ? 2 : 1;
+  const PREFIX = { 1: "", 2: "mockb/", 3: "v3/", 4: "v4/", 5: "v5/", 6: "v6/", 7: "v7/" };
+  const cur = rel.startsWith("v7/") ? 7 : rel.startsWith("v6/") ? 6 : rel.startsWith("v5/") ? 5 : rel.startsWith("v4/") ? 4 : rel.startsWith("v3/") ? 3 : rel.startsWith("mockb/") ? 2 : 1;
   const isV2 = cur === 2;
   const base = rel.slice(PREFIX[cur].length);
   const hash = here.hash;
   const href = (v) => new URL(PREFIX[v] + base, siteRoot).href + hash;
-  const DOT = { 1: "var(--accent,#7b93ff)", 2: "#FF0032", 3: "linear-gradient(135deg,#A485FF,#6C82FF,#3FDCF2)", 4: "conic-gradient(#A485FF,#6C82FF,#3FDCF2,#A485FF)", 5: "#4FD8E8", 6: "#73FFB9" };
-  const RING = { 1: "var(--accent,#7b93ff)", 2: "#FF3355", 3: "#6C82FF", 4: "#6C82FF", 5: "var(--accent,#8B97FF)", 6: "#73FFB9" };
+  const DOT = { 1: "var(--accent,#7b93ff)", 2: "#FF0032", 3: "linear-gradient(135deg,#A485FF,#6C82FF,#3FDCF2)", 4: "conic-gradient(#A485FF,#6C82FF,#3FDCF2,#A485FF)", 5: "#4FD8E8", 6: "#73FFB9", 7: "linear-gradient(135deg,#FF5B42,#EB7F31)" };
+  const RING = { 1: "var(--accent,#7b93ff)", 2: "#FF3355", 3: "#6C82FF", 4: "#6C82FF", 5: "var(--accent,#8B97FF)", 6: "#73FFB9", 7: "#FF5B42" };
 
   const VERSIONS = [
     { v: 1, name: "Version 1", desc: "Orbit Mono — editorial, minimal, Geist" },
@@ -27,6 +27,7 @@
     { v: 4, name: "Version 4", desc: "Monolith — crystal shards, scroll stories, Sora" },
     { v: 5, name: "Version 5", desc: "Clarity — content first, AI agent console, Sora" },
     { v: 6, name: "Version 6", desc: "Signal — neural network hero, Neue Montreal + Jura" },
+    { v: 7, name: "Version 7", desc: "Neural Ember — interactive neural network, ember accents, Sora" },
   ];
 
   const css = document.createElement("style");
