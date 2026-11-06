@@ -83,7 +83,7 @@ section:has(> .nn7), div:has(> .nn7) { isolation: isolate; }
   .h7 .strip a:nth-child(2) { border-right: 0; }
   .h7 .strip a:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
 }
-@media (max-width: 560px) { .h7 .strip a { padding: 16px 14px 18px; } .h7 .strip p { display: none; } .h7 .kicker .lbl { display: none; } }
+@media (max-width: 560px) { .h7 .strip a { padding: 16px 14px 18px; } .h7 .strip .t { font-size: 16px; } .h7 .strip p { font-size: 13.5px; } .h7 .kicker .lbl { display: none; } }
 
 /* ---------- Service cards: photo column ---------- */
 .scard.ph7 { grid-template-columns: 112px minmax(0, 1fr); column-gap: 18px; width: min(450px, 42vw); }

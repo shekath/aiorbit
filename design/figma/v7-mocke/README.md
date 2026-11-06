@@ -7,6 +7,25 @@ File: [Office-Works › Orbit page › MockE](https://www.figma.com/design/rtVgh
 | V7 · Home · Dark 1440 | `1599:3373` |
 | V7 · Home · Light 1440 | `1602:3338` |
 
+### Internal pages
+The Dark row is at the top of MockE, to the right of Home. The Light row sits directly below it.
+
+| Page | Dark | Light |
+|---|---|---|
+| Service · Enterprise Agent Solutions | `1604:3338` | `1606:3338` |
+| Service · AI-First Software Engineering | `1604:3601` | `1606:3580` |
+| Service · AI Governance | `1604:3864` | `1606:3822` |
+| Service · AI Advisory | `1604:4127` | `1606:4064` |
+| Case study · Lift-truck self-service | `1604:4390` | `1606:4306` |
+
+V7 sub-pages share Version 3's page structure, re-skinned with V4/V7 styles. They were made from the V3 MockC internal frames and converted:
+- colours are rebound to **AI Orbit V7 / Color**;
+- gradients are ember;
+- the header is the V7 nav;
+- the hero and CTA backgrounds use the calm neural-network renders (`sub-hero-*`, `sub-cta-*`).
+
+Type still uses the `V3 / *` text styles. They use the same families (Sora, DM Sans, JetBrains Mono).
+
 ## What it contains
 - **Variables:** collection **AI Orbit V7 / Color**, with Dark and Light modes.
   - Monochrome surfaces, as in V4.
