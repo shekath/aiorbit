@@ -17,8 +17,8 @@
   const base = rel.slice(PREFIX[cur].length);
   const hash = here.hash;
   const href = (v) => new URL(PREFIX[v] + base, siteRoot).href + hash;
-  const DOT = { 1: "var(--accent,#7b93ff)", 2: "#FF0032", 3: "linear-gradient(135deg,#A485FF,#6C82FF,#3FDCF2)", 4: "conic-gradient(#A485FF,#6C82FF,#3FDCF2,#A485FF)", 5: "#4FD8E8", 6: "linear-gradient(120deg,#FF653F,#2F2FE4)" };
-  const RING = { 1: "var(--accent,#7b93ff)", 2: "#FF3355", 3: "#6C82FF", 4: "#6C82FF", 5: "var(--accent,#8B97FF)", 6: "#FF653F" };
+  const DOT = { 1: "var(--accent,#7b93ff)", 2: "#FF0032", 3: "linear-gradient(135deg,#A485FF,#6C82FF,#3FDCF2)", 4: "conic-gradient(#A485FF,#6C82FF,#3FDCF2,#A485FF)", 5: "#4FD8E8", 6: "#73FFB9" };
+  const RING = { 1: "var(--accent,#7b93ff)", 2: "#FF3355", 3: "#6C82FF", 4: "#6C82FF", 5: "var(--accent,#8B97FF)", 6: "#73FFB9" };
 
   const VERSIONS = [
     { v: 1, name: "Version 1", desc: "Orbit Mono — editorial, minimal, Geist" },
@@ -26,7 +26,7 @@
     { v: 3, name: "Version 3", desc: "Neural Aurora — WebGL neural orbit, Sora" },
     { v: 4, name: "Version 4", desc: "Monolith — crystal shards, scroll stories, Sora" },
     { v: 5, name: "Version 5", desc: "Clarity — content first, AI agent console, Sora" },
-    { v: 6, name: "Version 6", desc: "Spatial — void violet, particle field, HUD modules" },
+    { v: 6, name: "Version 6", desc: "Signal — neural network hero, Neue Montreal + Jura" },
   ];
 
   const css = document.createElement("style");
