@@ -312,4 +312,4 @@ It includes Home Dark and Home Light, a service page, Mobile Dark and Mobile Lig
 
 **Version 6 "Signal" is in the MockD section:** Home Dark and Home Light at 1440. It also has the four service pages and the case study, each in Dark and Light. Colours are bound to **AI Orbit V6 / Color**, type uses the `V6 / *` styles, and the partner logos are original-colour vectors. Inter stands in for PP Neue Montreal in Figma. See [`design/figma/v6-mockd/`](design/figma/v6-mockd/README.md).
 
-**Version 7 "Neural Ember" is in the MockE section:** Home Dark and Home Light at 1440. Colours are bound to **AI Orbit V7 / Color**, and the inverted bands are pinned to the opposite mode. See [`design/figma/v7-mocke/`](design/figma/v7-mocke/README.md).
+**Version 7 "Neural Ember" is in the MockE section:** Home Dark and Home Light at 1440. It also has the four service pages and the case study, each in Dark and Light. Colours are bound to **AI Orbit V7 / Color**, and the inverted bands are pinned to the opposite mode. See [`design/figma/v7-mocke/`](design/figma/v7-mocke/README.md).
