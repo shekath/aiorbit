@@ -92,7 +92,7 @@ def footer(r):
   </div>
 </footer>
 <script src="{r}assets/js/v5.js"></script>
-<script src="{r}../assets/js/version-switch.js?v=6"></script>
+<script src="{r}../assets/js/version-switch.js?v=7"></script>
 </body>
 </html>
 """
