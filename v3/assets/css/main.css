@@ -101,8 +101,10 @@ a:hover [data-roll] span, button:hover [data-roll] span { transform: translateY(
 .pill b { height: 26px; display: inline-grid; place-items: center; padding: 0 10px; border-radius: var(--r-pill); background: var(--grad); color: #fff; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; }
 .hero .lead { max-width: 640px; }
 .hero .ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
-.hero .line { display: block; overflow: hidden; padding-bottom: .06em; }
-.hero .line > span { display: inline-block; transform: translateY(110%); animation: rise 1.2s var(--ease-out) forwards; }
+/* room for descenders (y, g, j): the reveal mask and the gradient's paint box both
+   extend below the baseline; the negative margin keeps the visual line spacing */
+.hero .line { display: block; overflow: hidden; padding: .16em 0 .2em; margin: -.16em 0 -.14em; }
+.hero .line > span { display: inline-block; padding-bottom: .12em; margin-bottom: -.12em; transform: translateY(110%); animation: rise 1.2s var(--ease-out) forwards; }
 .hero .line:nth-child(2) > span { animation-delay: .12s; }
 .hero-hud { position: absolute; left: 0; right: 0; bottom: 28px; display: flex; justify-content: space-between; align-items: end; gap: 16px; padding-inline: var(--gutter); pointer-events: none; }
 .hud { display: grid; gap: 4px; text-align: left; }

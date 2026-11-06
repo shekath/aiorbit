@@ -279,3 +279,7 @@ Colours are bound to the **AI Orbit V4 / Color** collection (Dark and Light mode
 - auto-layout throughout, so no text clips or overlaps.
 
 It includes Home Dark and Home Light, a service page, Mobile Dark and Mobile Light, and a component board. See [`design/figma/v5/`](design/figma/v5/README.md).
+
+**Version 3 "Neural Aurora" is in the MockC section:** Home Dark and Home Light at 1440. It also has the four service pages and the case study, each in Dark and Light. Colours are bound to **AI Orbit V3 / Color**, type uses the `V3 / *` styles, and the WebGL hero and CTA are image renders. See [`design/figma/v3-mockc/`](design/figma/v3-mockc/README.md).
+
+**Version 6 "Signal" is in the MockD section:** Home Dark and Home Light at 1440. It also has the four service pages and the case study, each in Dark and Light. Colours are bound to **AI Orbit V6 / Color**, type uses the `V6 / *` styles, and the partner logos are original-colour vectors. Inter stands in for PP Neue Montreal in Figma. See [`design/figma/v6-mockd/`](design/figma/v6-mockd/README.md).

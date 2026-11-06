@@ -81,6 +81,21 @@
     new ResizeObserver(() => { build(); upd(); }).observe(st); addEventListener("scroll", upd, { passive: true });
   });
 
+  /* ---- Partner logo rail: scrolls only when more logos than columns ---- */
+  $$(".logo-rail").forEach((rail) => {
+    const nav = rail.parentElement.querySelector(".rail-nav");
+    const state = () => { const over = rail.scrollWidth > rail.clientWidth + 2; rail.classList.toggle("overflow", over); if (nav) nav.hidden = !over;
+      rail.classList.toggle("at-start", rail.scrollLeft < 4); rail.classList.toggle("at-end", rail.scrollLeft + rail.clientWidth > rail.scrollWidth - 4); };
+    const page = () => (rail.querySelector("li")?.getBoundingClientRect().width || 200) * (innerWidth < 760 ? 1 : 2);
+    nav?.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => rail.scrollBy({ left: page() * +b.dataset.dir, behavior: motion ? "smooth" : "auto" })));
+    let down = null;
+    rail.addEventListener("pointerdown", (e) => { if (!rail.classList.contains("overflow") || e.pointerType !== "mouse") return; down = { x: e.clientX, s: rail.scrollLeft }; rail.classList.add("drag"); rail.setPointerCapture(e.pointerId); });
+    rail.addEventListener("pointermove", (e) => { if (down) rail.scrollLeft = down.s - (e.clientX - down.x); });
+    const up = () => { if (!down) return; down = null; rail.classList.remove("drag"); };
+    rail.addEventListener("pointerup", up); rail.addEventListener("pointercancel", up);
+    rail.addEventListener("scroll", state, { passive: true }); new ResizeObserver(state).observe(rail); new MutationObserver(state).observe(rail, { childList: true, subtree: true }); state();
+  });
+
   /* ---- FAQ ---- */
   $$(".qa button").forEach((b) => b.addEventListener("click", () => b.setAttribute("aria-expanded", String(b.getAttribute("aria-expanded") !== "true"))));
 

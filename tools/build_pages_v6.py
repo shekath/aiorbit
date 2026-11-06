@@ -194,6 +194,34 @@ def case_panel(i, ind, t, b, m, ml, u, link="Read case study"):
     return f'<a class="case" style="--i:{i}" href="{u}"{attrs}><span class="plus tl" aria-hidden="true"></span><span class="plus br" aria-hidden="true"></span><span class="no"><b aria-hidden="true">{i + 1:02d}</b><span class="chip">{ind}</span></span><span class="what"><h3 class="h3">{t}</h3><span class="body">{b}</span><span class="link">{link} {ARR}{sr}</span></span><span class="res"><b>{m}</b><span>{ml}</span></span></a>'
 
 
+# (file, name, height px at desktop, original wordmark ink used in light mode; None = no ink to adapt)
+LOGOS = [("microsoft", "Microsoft", 27, "#706d6e"), ("aws", "AWS", 34, "#252f3e"), ("salesforce", "Salesforce", 44, None),
+         ("servicenow", "ServiceNow", 22, "#000000"), ("oracle", "Oracle", 18, None), ("uipath", "UiPath", 30, None)]
+INK = {"microsoft": 'fill="#706d6e"', "aws": 'fill="#252f3e"'}
+
+
+def logo_svg(f, h):
+    """Inline the original-colour partner SVG. Brand colours stay as they are; the dark
+    wordmark ink becomes currentColor so it reads on dark (white) and light (original ink)."""
+    import re
+    svg = (ROOT / "assets" / "partners" / f"{f}.svg").read_text(encoding="utf-8").strip()
+    svg = re.sub(r'\s(width|height)="[^"]*"', "", svg, count=2)
+    if f in INK:
+        svg = svg.replace(INK[f], 'fill="currentColor"')
+    if f == "servicenow":  # wordmark paths carry no fill (default black)
+        svg = svg.replace("<svg ", '<svg fill="currentColor" ', 1)
+    svg = svg.replace(' role="img"', "")
+    return svg.replace("<svg ", f'<svg class="logo" style="--h:{h}px" aria-hidden="true" focusable="false" ', 1)
+
+
+def logo_rail(r):
+    """Original-colour partner logos in fixed-width cells. Six fill the row exactly;
+    any extra logos make the rail scroll (snap, edge fades, prev/next buttons)."""
+    lis = "".join(f'<li style="--ink:{ink or "currentColor"}">{logo_svg(f, h)}<span class="sr-only">{n}</span></li>' for f, n, h, ink in LOGOS)
+    nav = f'<div class="rail-nav" hidden><button type="button" class="icon-btn" data-dir="-1" aria-label="Scroll partner logos left">{ic("arrow", 16)}</button><button type="button" class="icon-btn" data-dir="1" aria-label="Scroll partner logos right">{ic("arrow", 16)}</button></div>'
+    return f'<div class="logo-rail" role="region" aria-label="Partner logos" tabindex="0"><ul>{lis}</ul></div>{nav}'
+
+
 # ---------------------------------------------------------------- HOME
 def home():
     r = ""
@@ -234,7 +262,7 @@ def home():
   <div class="ticker" aria-hidden="true"><div class="track">{tick_item * 2}</div></div>
 
   <section class="platforms" aria-label="Platforms we build on">
-    <p class="label">Built on platforms you trust</p><ul><li>Microsoft</li><li>AWS</li><li>Salesforce</li><li>ServiceNow</li><li>Oracle</li><li>UiPath</li></ul>
+    <p class="label">Built on platforms you trust</p>{logo_rail(r)}
   </section>
 
   {signal_log()}
