@@ -213,6 +213,7 @@ def home():
 {header(d, 'home', dark=True)}
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-globe" aria-hidden="true"></div>
     <div class="hero-in">
       <div class="hero-copy">
         <p class="eyebrow light">Evoke AI Orbit</p>
@@ -227,6 +228,7 @@ def home():
       <div class="strips" role="group" aria-roledescription="carousel" aria-label="Featured stories">{slides}</div>
     </div>
   </section>
+  <script type="module" src="{d}v8/assets/js/globe8.js"></script>
 
   <section class="sec off" id="services" aria-labelledby="svc-title">
     <div class="wrap">

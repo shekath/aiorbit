@@ -556,3 +556,16 @@ body.sub main { padding-top: 96px; }
   .js-m .wipe { clip-path: none; }
   .js-m .wipe img { transform: none; }
 }
+
+/* ==========================================================================
+   Hero background: WebGL globe + AI network (v8/assets/js/globe8.js)
+   50% opacity, faded toward the headline so the copy stays dominant.
+   ========================================================================== */
+.hero { isolation: isolate; }
+.hero-globe { position: absolute; inset: 0; z-index: 0; opacity: .5; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.25) 26%, #000 52%); mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.25) 26%, #000 52%); }
+.hero-globe canvas { display: block; width: 100% !important; height: 100% !important; }
+.hero-in { z-index: 1; }
+@media (max-width: 900px) {
+  .hero-globe { -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.35) 40%, #000 70%); mask-image: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.35) 40%, #000 70%); }
+}
