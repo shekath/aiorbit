@@ -137,7 +137,7 @@ def footer(depth):
 
 def tail(depth):
     return f"""{talk_panel()}<script src="{depth}v8/assets/js/v8.js"></script>
-<script src="{depth}assets/js/version-switch.js?v=8"></script>
+<script src="{depth}assets/js/version-switch.js?v=9"></script>
 </body>
 </html>
 """
