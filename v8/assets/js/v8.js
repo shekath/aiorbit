@@ -145,3 +145,80 @@
   }));
   $$("[data-year]").forEach((y) => y.textContent = new Date().getFullYear());
 })();
+
+/* ---------- Micro-interactions ---------- */
+(() => {
+  const $ = (s, el = document) => el.querySelector(s), $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  /* scroll progress (always on; it carries information, not decoration) */
+  const bar = document.createElement("div"); bar.className = "progress8"; bar.setAttribute("aria-hidden", "true"); document.body.appendChild(bar);
+  const prog = () => { const max = document.documentElement.scrollHeight - innerHeight; bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`; };
+  addEventListener("scroll", prog, { passive: true }); prog();
+
+  if (reduce) return;
+  document.documentElement.classList.add("js-m");
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px", threshold: .15 });
+
+  /* headings: split plain-text headings into words that rise in */
+  $$("main h1, main h2").forEach((h) => {
+    if (h.closest(".talk, .hero") || h.classList.contains("eyebrow") || [...h.childNodes].some((n) => n.nodeType === 1)) return;
+    const text = h.textContent.trim(), words = text.split(/\s+/); h.setAttribute("aria-label", text);
+    h.innerHTML = words.map((w, i) => `<span class="w" aria-hidden="true" style="--i:${i}">${w}</span>`).join(" ");
+    h.classList.add("split"); io.observe(h);
+  });
+  /* images: wipe open */
+  // a fully clipped element never reports as visible, so watch its parent and open the image from there
+  const wipes = new Map(), wio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { wipes.get(e.target)?.forEach((w) => w.classList.add("in")); wio.unobserve(e.target); } }), { rootMargin: "0px 0px -6% 0px", threshold: .1 });
+  $$(".card-img, .col-img, .tab-media, .cs-media, .fade-media").forEach((el) => { el.classList.add("wipe"); const p = el.parentElement; if (!wipes.has(p)) wipes.set(p, []); wipes.get(p).push(el); wio.observe(p); });
+  /* logos: stagger */
+  $$(".logos").forEach((ul) => { $$("li", ul).forEach((li, i) => li.style.setProperty("--i", i)); io.observe(ul); });
+
+  /* count up formatted figures (453,958 · 7.41B · 14,843 · 100K+) */
+  const cio = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) return; cio.unobserve(e.target);
+    const node = [...e.target.childNodes].reverse().find((n) => n.nodeType === 3 && /\d/.test(n.textContent)); if (!node) return;
+    const m = node.textContent.match(/^(\D*)([\d,]*\.?\d+)(.*)$/); if (!m) return;
+    const [, pre, num, suf] = m, dec = (num.split(".")[1] || "").length, end = parseFloat(num.replace(/,/g, "")), comma = num.includes(",");
+    const fmt = (v) => { const s = v.toFixed(dec); return comma ? Number(s).toLocaleString("en-US") : s; };
+    const t0 = performance.now(); e.target.setAttribute("aria-label", e.target.textContent.trim());
+    const tick = (t) => { const p = Math.min(1, (t - t0) / 1600); node.textContent = pre + fmt(end * (1 - Math.pow(1 - p, 4))) + suf; if (p < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick); }), { threshold: .6 });
+  $$(".ebox .big, .rnum").forEach((el) => { const node = [...el.childNodes].reverse().find((n) => n.nodeType === 3); if (node && /^\D*[\d,]*\.?\d+[^\d–-]*$/.test(node.textContent.trim())) cio.observe(el); });
+
+  /* hero autoplay timer: restart whenever the slide changes */
+  const tl = $(".hero .count i"), cur = $(".hero .count .cur");
+  if (tl && cur) { const run = () => { tl.classList.remove("run"); void tl.offsetWidth; tl.classList.add("run"); }; run(); new MutationObserver(run).observe(cur, { childList: true, characterData: true, subtree: true }); }
+
+  /* "Let's talk" nudges once after 9 s if it has not been opened */
+  const tab = $(".talk-tab"); let opened = false; tab?.addEventListener("click", () => { opened = true; });
+  setTimeout(() => { if (!opened && tab) { tab.classList.add("nudge"); tab.addEventListener("animationend", () => tab.classList.remove("nudge"), { once: true }); } }, 9000);
+
+  /* light parallax on large photos */
+  const par = $$(".cs-media img, .fade-media, .globe-wrap");
+  const onPar = () => par.forEach((el) => { const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return; const k = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+    el.style.translate = `0 ${(-k * (el.tagName === "IMG" ? 40 : 18)).toFixed(1)}px`; });
+  addEventListener("scroll", onPar, { passive: true }); onPar();
+
+  if (!fine) return;
+  /* cursor: red dot that grows over links and says "View" on cards */
+  const c = document.createElement("div"); c.className = "cur8"; c.setAttribute("aria-hidden", "true"); document.body.appendChild(c);
+  let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y;
+  addEventListener("pointermove", (e) => { x = e.clientX; y = e.clientY; c.classList.add("on"); }, { passive: true });
+  document.addEventListener("pointerleave", () => c.classList.remove("on"));
+  (function loop() { cx += (x - cx) * .22; cy += (y - cy) * .22; c.style.transform = `translate(${cx}px, ${cy}px)`; requestAnimationFrame(loop); })();
+  document.addEventListener("pointerover", (e) => {
+    const card = e.target.closest(".card a, .strip-link"), link = !card && e.target.closest("a, button, input, select, textarea, label");
+    c.classList.toggle("view", !!card); c.classList.toggle("link", !!link); c.textContent = card ? "View" : "";
+  });
+  /* drag-to-scroll on card rails */
+  $$(".rail").forEach((rail) => { let down = null, moved = false;
+    rail.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") return; down = { x: e.clientX, s: rail.scrollLeft }; moved = false; rail.style.scrollSnapType = "none"; });
+    addEventListener("pointermove", (e) => { if (!down) return; const dx = e.clientX - down.x; if (Math.abs(dx) > 4) moved = true; rail.scrollLeft = down.s - dx; });
+    addEventListener("pointerup", () => { if (!down) return; down = null; rail.style.scrollSnapType = ""; });
+    rail.addEventListener("click", (e) => { if (moved) { e.preventDefault(); moved = false; } }, true); });
+  /* magnetic buttons */
+  $$(".btn, .circ").forEach((el) => {
+    el.addEventListener("pointermove", (e) => { const r = el.getBoundingClientRect(); el.style.translate = `${(e.clientX - r.left - r.width / 2) * .18}px ${(e.clientY - r.top - r.height / 2) * .25}px`; });
+    el.addEventListener("pointerleave", () => { el.style.translate = ""; });
+  });
+})();

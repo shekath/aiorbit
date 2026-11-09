@@ -323,6 +323,21 @@ Its layout system is modelled on [brainboxai.com](https://brainboxai.com/): sect
   - big result cards and the before/after outcomes table;
   - a red CTA card;
   - related case studies.
+- **Micro-interactions:**
+  - a red scroll progress bar;
+  - headings rise word by word as they enter, and photos wipe open from the bottom;
+  - partner logos and stat cards stagger in;
+  - figures count up (453,958, 7.41B, 14,843, 100K+);
+  - service cards fill red from the bottom on hover;
+  - a timer line in the hero slide counter, and a red rule that fills under the active industry;
+  - cards lift as their red tag stretches;
+  - links get an underline sweep;
+  - buttons give press feedback and pull towards the pointer with a spring back;
+  - a red cursor dot that grows over links and reads "View" on cards;
+  - drag-to-scroll on the card rails;
+  - light parallax on large photos and the globe;
+  - the "Let's talk" tab nudges once after 9 seconds.
+  - Pointer effects are skipped on touch screens. With reduced motion, everything is static except the progress bar.
 - **Build:** `python3 tools/build_pages_v8.py` regenerates `v8/` from the shared AI Orbit content. The styles are `v8/assets/css/v8.css` and the script is `v8/assets/js/v8.js`; there are no dependencies.
 
 **Checks:**

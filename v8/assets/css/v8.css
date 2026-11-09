@@ -484,3 +484,75 @@ body.sub main { padding-top: 96px; }
   *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
   .rv { transform: none; }
 }
+
+/* ==========================================================================
+   Micro-interactions (desktop pointer effects are skipped on touch and for
+   reduced motion; everything is readable without JavaScript)
+   ========================================================================== */
+.progress8 { position: fixed; left: 0; top: 0; width: 100%; height: 2px; z-index: 150; background: var(--red); transform-origin: 0 50%; transform: scaleX(0); pointer-events: none; }
+.cur8 { position: fixed; left: 0; top: 0; z-index: 250; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--red); color: #fff; pointer-events: none; opacity: 0;
+  display: grid; place-items: center; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; font-weight: 400; white-space: nowrap;
+  transition: width .35s var(--ease), height .35s var(--ease), margin .35s var(--ease), background .3s, opacity .3s; }
+.cur8.on { opacity: 1; }
+.cur8.link { width: 36px; height: 36px; margin: -18px 0 0 -18px; background: rgba(224, 35, 45, .16); }
+.cur8.view { width: 74px; height: 74px; margin: -37px 0 0 -37px; background: var(--red); }
+.cur8.drag { width: 74px; height: 74px; margin: -37px 0 0 -37px; background: var(--ink); }
+@media (hover: none), (pointer: coarse) { .cur8 { display: none; } }
+
+/* headings rise word by word as they enter */
+.js-m .split .w { display: inline-block; opacity: 0; transform: translateY(.55em); transition: opacity .8s var(--ease), transform .9s var(--ease); transition-delay: calc(var(--i) * 38ms); }
+.js-m .split.in .w { opacity: 1; transform: none; }
+/* images wipe open from the bottom */
+.js-m .wipe { clip-path: inset(100% 0 0 0); transition: clip-path 1.2s var(--ease); }
+.js-m .wipe.in { clip-path: inset(0 0 0 0); }
+.js-m .wipe img { transform: scale(1.12); transition: transform 1.6s var(--ease); }
+.js-m .wipe.in img { transform: scale(1); }
+/* logos and stat cards stagger in */
+.js-m .logos li { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--i) * 70ms); }
+.js-m .logos.in li { opacity: 1; transform: none; }
+
+/* press feedback */
+.btn, .circ { transition: color .35s, border-color .35s, transform .2s var(--ease), background .3s, translate .45s cubic-bezier(.34, 1.56, .64, 1); }
+.btn:active, .circ:active { transform: scale(.96); }
+
+/* product bucket: red wipes up from the bottom */
+.bucket { position: relative; isolation: isolate; overflow: hidden; }
+.bucket::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--red); transform: translateY(101%); transition: transform .6s var(--ease); }
+.bucket.is-on { background: #fff; }
+.bucket.is-on::before { transform: none; }
+.bucket h3 { transition: transform .5s var(--ease); }
+.bucket.is-on h3 { transform: translateX(4px); }
+
+/* hero autoplay timer inside the counter */
+.count i { position: relative; width: 44px; background: rgba(255, 255, 255, .3); overflow: hidden; }
+.count i::after { content: ""; position: absolute; inset: 0; background: #fff; transform-origin: left; transform: scaleX(0); }
+.count i.run::after { animation: timer8 6s linear forwards; }
+@keyframes timer8 { to { transform: scaleX(1); } }
+
+/* underline sweep on text links */
+.fcol a, .fcol button, .crumbs a, .ftr-legal a, .drawer-links button { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .45s var(--ease), color .25s; }
+.fcol a:hover, .fcol button:hover, .crumbs a:hover, .ftr-legal a:hover { background-size: 100% 1px; }
+
+/* cards lift; the red tag stretches */
+.card a { transition: transform .55s var(--ease), box-shadow .55s var(--ease); }
+.card a:hover, .card a:focus-visible { transform: translateY(-6px); box-shadow: 0 34px 50px -38px rgba(0, 0, 0, .5); }
+.tag { transition: padding .45s var(--ease), background .3s; }
+.card a:hover .tag { padding-left: 22px; background: var(--red-ink); }
+.ebox, .stat, .rcard, .pcard, .cap { will-change: transform; }
+.stat, .rcard { transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+.stat:hover, .rcard:hover { transform: translateY(-4px); box-shadow: 0 30px 50px -36px rgba(0, 0, 0, .45); }
+
+/* industries list: red rule grows under the active item */
+.ind-list button { position: relative; }
+.ind-list button::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%; background: var(--red); transform: scaleX(0); transform-origin: left; }
+.ind-list button.on::after { animation: timer8 4.2s linear forwards; }
+
+/* "Let's talk" tab nudges once if nobody has opened it */
+@keyframes nudge8 { 0%, 100% { transform: none; } 30% { transform: translateX(-8px); } 60% { transform: translateX(-3px); } }
+.talk-tab.nudge { animation: nudge8 .9s var(--ease) 2; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-m .split .w, .js-m .logos li { opacity: 1; transform: none; }
+  .js-m .wipe { clip-path: none; }
+  .js-m .wipe img { transform: none; }
+}
