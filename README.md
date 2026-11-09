@@ -338,7 +338,8 @@ Its layout system is modelled on [brainboxai.com](https://brainboxai.com/): sect
   - light parallax on large photos and the globe;
   - the "Let's talk" tab nudges once after 9 seconds.
   - Pointer effects are skipped on touch screens. With reduced motion, everything is static except the progress bar.
-- **Build:** `python3 tools/build_pages_v8.py` regenerates `v8/` from the shared AI Orbit content. The styles are `v8/assets/css/v8.css` and the script is `v8/assets/js/v8.js`; there are no dependencies.
+- **Hero background:** a three.js globe wrapped in an AI network sits behind the photo strips at 50% opacity, faded toward the headline (from the top on phones). Red pulses run between network nodes, Evoke's seven offices and the office arcs. Hover lights nearby nodes, drag spins the globe, and a click sends a wave. With reduced motion it is a still frame. Script: `v8/assets/js/globe8.js` (ES module, vendored `assets/vendor/three.module.min.js`).
+- **Build:** `python3 tools/build_pages_v8.py` regenerates `v8/` from the shared AI Orbit content. The styles are `v8/assets/css/v8.css`, the interface script is `v8/assets/js/v8.js` and the hero globe is `v8/assets/js/globe8.js`.
 
 **Checks:**
 - axe: 0 violations on the home page, a service page and the case study.
