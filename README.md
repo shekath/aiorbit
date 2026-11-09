@@ -287,6 +287,65 @@ Version 7 is Version 4's monolith layout and motion with a new hero and accents.
 - No horizontal overflow from 320px to 1440px.
 - No clipped text.
 
+## Version 8 — "Pure" (`v8/`)
+
+Version 8 is a clean, imagery-led editorial redesign. Pick it from the **Version** dropdown, or open `v8/index.html`.
+
+Its layout system is modelled on [brainboxai.com](https://brainboxai.com/): section order, spacing, type scale, colour rhythm and interaction patterns. All copy is AI Orbit content and all photos are AI Orbit's. No code, text, logos or images are taken from the reference site.
+
+- **Type:** Inter Tight Light is used for everything. It stands in for the reference's commercial Atlas Grotesk.
+- **Colour and controls:**
+  - a black hero, white and off-white content bands, an ink stats band and a charcoal CTA;
+  - one red accent, `#E0232D` (`#C41A23` for small red text);
+  - square, thin-outline buttons with small tracked capitals.
+- **Home:**
+  - a full-height black hero with an expanding image-strip slider and a "1 — 6" counter;
+  - four service cards with a rotating bold word in the heading; the hovered card turns red;
+  - "Our impact": a dotted globe with Evoke's seven offices and orbit arcs, plus three count-up stat cards;
+  - a "Built on platforms you trust" logo row;
+  - a dark 2×2 grid of delivery-engine figures;
+  - an industries section that fades between sector photos;
+  - a charcoal knowledge-hub CTA with a phone mock-up;
+  - a client-outcomes carousel and a case-study card rail;
+  - a lined footer.
+- **"Let's talk":** a fixed red tab, on every page, opens a side panel with the contact form and office clocks.
+- **Service pages:**
+  - an intro with a photo ring and an agent message bubble;
+  - capability tabs over a photo;
+  - two path columns;
+  - the agentic pipeline around an orbit core;
+  - a red CTA band with the service's stats;
+  - FAQ;
+  - "You would also like".
+- **Case study:**
+  - a hero image with a client card and a breadcrumb bar;
+  - Context, a project overview table and Approach;
+  - big result cards and the before/after outcomes table;
+  - a red CTA card;
+  - related case studies.
+- **Micro-interactions:**
+  - a red scroll progress bar;
+  - headings rise word by word as they enter, and photos wipe open from the bottom;
+  - partner logos and stat cards stagger in;
+  - figures count up (453,958, 7.41B, 14,843, 100K+);
+  - service cards fill red from the bottom on hover;
+  - a timer line in the hero slide counter, and a red rule that fills under the active industry;
+  - cards lift as their red tag stretches;
+  - links get an underline sweep;
+  - buttons give press feedback and pull towards the pointer with a spring back;
+  - a red cursor dot that grows over links and reads "View" on cards;
+  - drag-to-scroll on the card rails;
+  - light parallax on large photos and the globe;
+  - the "Let's talk" tab nudges once after 9 seconds.
+  - Pointer effects are skipped on touch screens. With reduced motion, everything is static except the progress bar.
+- **Build:** `python3 tools/build_pages_v8.py` regenerates `v8/` from the shared AI Orbit content. The styles are `v8/assets/css/v8.css` and the script is `v8/assets/js/v8.js`; there are no dependencies.
+
+**Checks:**
+- axe: 0 violations on the home page, a service page and the case study.
+- No horizontal overflow from 320px to 1440px.
+- No clipped text and no console errors.
+- 13 interaction checks pass: the "Let's talk" panel and form, the menus, hero slider, industries, outcomes, card rails, capability tabs and FAQ.
+
 ## Figma file status
 
 The MockA section has the component board (Button, Tag, Eyebrow, Header/Nav, Mega menu, Service Row, Stat, Pipeline Stage, Case Card, Knowledge Row, Capability, Footer) and all six **Dark** screens. Hover and active states are built as variants.
