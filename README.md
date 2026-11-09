@@ -346,6 +346,24 @@ Its layout system is modelled on [brainboxai.com](https://brainboxai.com/): sect
 - No clipped text and no console errors.
 - 13 interaction checks pass: the "Let's talk" panel and form, the menus, hero slider, industries, outcomes, card rails, capability tabs and FAQ.
 
+## Version 9 — "Pure Network" (`v9/`)
+
+Version 9 is Version 8 with a WebGL hero and a new accent colour. Pick it from the **Version** dropdown, or open `v9/index.html`.
+
+- **Hero:** a three.js globe wrapped in an AI network sits behind the photo strips at 50% opacity, fading toward the headline so the copy stays dominant (on phones it fades from the top).
+  - A dotted globe with Evoke's seven offices and arcs between them, inside a shell of network nodes. Pulses run between nodes, down to the offices and along the office arcs. Two thin orbits circle the globe, each with a satellite.
+  - Hover lights up nearby nodes and links, drag spins the globe with momentum, and a click sends a wave across the network.
+  - With reduced motion it shows a single still frame. It pauses when the hero is off screen.
+- **Accent:** `#ff4c0a` replaces the Version 8 red.
+  - Small text on an orange fill is black, because white on `#ff4c0a` is only 3.3:1.
+  - Orange text on white uses the darker `#C23800` (`--red-ink`). Darker hover fills keep white text.
+- **Build:** `python3 tools/build_pages_v9.py` regenerates `v9/`.
+  - Styles: `v9/assets/css/v9.css`. Interface script: `v9/assets/js/v9.js`. Hero globe: `v9/assets/js/globe9.js`, an ES module that uses the vendored `assets/vendor/three.module.min.js`.
+
+**Checks:**
+- axe: 0 violations on all six pages, with and without reduced motion.
+- No horizontal overflow from 320px to 1440px, and no console errors.
+
 ## Figma file status
 
 The MockA section has the component board (Button, Tag, Eyebrow, Header/Nav, Mega menu, Service Row, Stat, Pipeline Stage, Case Card, Knowledge Row, Capability, Footer) and all six **Dark** screens. Hover and active states are built as variants.
@@ -372,3 +390,5 @@ It includes Home Dark and Home Light, a service page, Mobile Dark and Mobile Lig
 **Version 6 "Signal" is in the MockD section:** Home Dark and Home Light at 1440. It also has the four service pages and the case study, each in Dark and Light. Colours are bound to **AI Orbit V6 / Color**, type uses the `V6 / *` styles, and the partner logos are original-colour vectors. Inter stands in for PP Neue Montreal in Figma. See [`design/figma/v6-mockd/`](design/figma/v6-mockd/README.md).
 
 **Version 7 "Neural Ember" is in the MockE section:** Home Dark and Home Light at 1440. It also has the four service pages and the case study, each in Dark and Light. Colours are bound to **AI Orbit V7 / Color**, and the inverted bands are pinned to the opposite mode. See [`design/figma/v7-mocke/`](design/figma/v7-mocke/README.md).
+
+**Version 8 "Pure" is in the MockF section:** Home, the four service pages and the case study at 1440 (one look, so no Dark/Light pair). Colours are bound to **AI Orbit V8 / Color**, and type uses the `V8 / *` styles, with Inter standing in for Inter Tight. See [`design/figma/v8-mockf/`](design/figma/v8-mockf/README.md).

@@ -91,7 +91,7 @@ def footer(r):
 </footer>
 <script src="{r}assets/js/v6.js"></script>
 <script type="module" src="{r}assets/js/neural-gl.js"></script>
-<script src="{r}../assets/js/version-switch.js?v=8"></script>
+<script src="{r}../assets/js/version-switch.js?v=9"></script>
 </body>
 </html>
 """
